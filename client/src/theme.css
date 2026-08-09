@@ -1,0 +1,55 @@
+/* ===========================================================
+   MindBridge — Design Tokens
+   Import this once in index.js: import "./theme.css";
+   =========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* --- Colour palette --- */
+  --mb-bg: #F6F5FB;
+  --mb-surface: #FFFFFF;
+  --mb-ink: #2D2A5C;
+  --mb-text: #46456B;
+  --mb-text-muted: #8C8AA8;
+  --mb-sage: #6E9A82;
+  --mb-sage-dark: #557C68;
+  --mb-gold: #D9A45B;
+  --mb-border: #E4E1F2;
+  --mb-danger: #C6604F;
+
+  /* --- Typography --- */
+  --mb-font-display: 'Fraunces', Georgia, serif;
+  --mb-font-body: 'Inter', -apple-system, sans-serif;
+
+  /* --- Layout --- */
+  --mb-radius: 16px;
+  --mb-radius-sm: 10px;
+  --mb-shadow: 0 4px 24px rgba(45, 42, 92, 0.08);
+  --mb-max-width: 1160px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--mb-bg);
+  color: var(--mb-text);
+  font-family: var(--mb-font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--mb-font-display);
+  color: var(--mb-ink);
+  margin: 0;
+}
+
+a { text-decoration: none; color: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

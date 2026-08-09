@@ -1,0 +1,115 @@
+.mb-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(246, 245, 251, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--mb-border);
+}
+
+.mb-navbar__inner {
+  max-width: var(--mb-max-width);
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.mb-navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mb-font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--mb-ink);
+  margin-right: auto;
+}
+
+.mb-navbar__links {
+  display: flex;
+  gap: 6px;
+}
+
+.mb-navbar__link {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--mb-text);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.mb-navbar__link:hover {
+  background: var(--mb-surface);
+  color: var(--mb-ink);
+}
+
+.mb-navbar__link.is-active {
+  background: var(--mb-sage);
+  color: #fff;
+}
+
+.mb-navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mb-navbar__ghost-btn {
+  padding: 9px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--mb-ink);
+}
+
+.mb-navbar__cta-btn {
+  padding: 9px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--mb-ink);
+  border-radius: 999px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.mb-navbar__cta-btn:hover {
+  background: var(--mb-sage-dark);
+  transform: translateY(-1px);
+}
+
+.mb-navbar__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.mb-navbar__toggle span {
+  width: 22px;
+  height: 2px;
+  background: var(--mb-ink);
+  border-radius: 2px;
+}
+
+/* --- Mobile --- */
+@media (max-width: 860px) {
+  .mb-navbar__links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--mb-surface);
+    padding: 12px;
+    border-bottom: 1px solid var(--mb-border);
+    display: none;
+  }
+  .mb-navbar__links.is-open { display: flex; }
+  .mb-navbar__actions { display: none; }
+  .mb-navbar__toggle { display: flex; }
+}
