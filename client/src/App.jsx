@@ -1,12 +1,3 @@
-
-import MoodTracker from "./pages/MoodTracker";
-
-function App() {
-  return (
-    <div>
-      <MoodTracker />
-    </div>
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./theme.css";
 
@@ -16,11 +7,12 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import  MoodTracker from "./pages/MoodTracker";
 
+
 // TODO (other members): import and add your pages here
 // import Login from "./pages/Login";
 // import Register from "./pages/Register";
 // import Journal from "./pages/Journal";
-// import Stress from "./pages/Stress";
+
 
 function App() {
   return (
@@ -30,6 +22,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/mood-tracker" element={<MoodTracker />} />
+
+      
 
         {/* Add teammates' routes below as they push their code */}
         {/* <Route path="/login" element={<Login />} /> */}

@@ -1,0 +1,106 @@
+.mood-container {
+  max-width: 750px;
+  margin: 50px auto;
+  padding: 45px 50px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.mood-title {
+  font-size: 42px;
+  margin-bottom: 30px;
+  color: #343044;
+  font-weight: 600;
+}
+
+/* Mood selection */
+.mood-select {
+  width: 100%;
+  max-width: 500px;
+  padding: 16px 18px;
+  font-size: 17px;
+  border: 2px solid #d8d2f5;
+  border-radius: 14px;
+  background: #faf9ff;
+  color: #444;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  transition: 0.3s ease;
+}
+
+.mood-select:hover,
+.mood-select:focus {
+  border-color: #7c6ee6;
+  box-shadow: 0 0 0 4px rgba(124, 110, 230, 0.12);
+}
+
+/* Notes box */
+.mood-notes {
+  width: 100%;
+  max-width: 500px;
+  min-height: 160px;
+  margin-top: 20px;
+  padding: 18px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  border: 2px solid #d8d2f5;
+  border-radius: 14px;
+  background: #faf9ff;
+  color: #333;
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: 0.3s ease;
+}
+
+.mood-notes:focus {
+  border-color: #7c6ee6;
+  box-shadow: 0 0 0 4px rgba(124, 110, 230, 0.12);
+}
+
+.mood-notes::placeholder {
+  color: #999;
+}
+
+/* Save button */
+.mood-container button {
+  margin-top: 20px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 12px;
+  background: #6f63c5;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.mood-container button:hover {
+  background: #574ba8;
+  transform: translateY(-2px);
+}
+
+/* Saved moods section */
+.mood-container hr {
+  margin: 40px 0 25px;
+  border: none;
+  border-top: 1px solid #e5e2f0;
+}
+
+.mood-container h2 {
+  color: #403b58;
+  margin-bottom: 20px;
+}
+
+/* Saved mood cards */
+.mood-container h3 {
+  margin: 0 0 8px;
+  color: #574ba8;
+}
+
+.mood-container p {
+  color: #666;
+}

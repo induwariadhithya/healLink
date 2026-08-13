@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "./MoodTracker.css";
 
 function MoodTracker() {
   const [mood, setMood] = useState("");
@@ -51,10 +52,14 @@ function MoodTracker() {
 };
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h1>Mood Tracker</h1>
+    <div className="mood-container">
+      <h1 className="mood-title">Mood Tracker</h1>
 
-      <select value={mood} onChange={(e) => setMood(e.target.value)}>
+      <select
+        className="mood-select"
+        value={mood}
+        onChange={(e) => setMood(e.target.value)}
+      >
         <option value="">Select Mood</option>
         <option value="Happy">Happy 😊</option>
         <option value="Sad">Sad 😢</option>
@@ -66,6 +71,7 @@ function MoodTracker() {
       <br /><br />
 
       <textarea
+        className="mood-notes"
         rows="5"
         cols="40"
         placeholder="Write your note..."
