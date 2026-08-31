@@ -39,7 +39,7 @@ export default function Footer() {
             >
               GitHub Repository
             </a>
-            <span className="mb-footer__muted">ICT2022 Final Project</span>
+           
           </div>
         </div>
       </div>
