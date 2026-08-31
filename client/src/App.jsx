@@ -5,13 +5,14 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import  MoodTracker from "./pages/MoodTracker";
+
 
 // TODO (other members): import and add your pages here
 // import Login from "./pages/Login";
 // import Register from "./pages/Register";
-// import MoodTracker from "./pages/MoodTracker";
 // import Journal from "./pages/Journal";
-// import Stress from "./pages/Stress";
+
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/mood-tracker" element={<MoodTracker />} />
+
+      
 
         {/* Add teammates' routes below as they push their code */}
         {/* <Route path="/login" element={<Login />} /> */}
@@ -30,6 +34,7 @@ function App() {
       </Routes>
       <Footer />
     </BrowserRouter>
+
   );
 }
 
