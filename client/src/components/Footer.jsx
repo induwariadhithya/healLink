@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="mb-footer">
       <div className="mb-footer__inner">
         <div className="mb-footer__brand">
-          <span className="mb-footer__title">MindBridge</span>
+          <span className="mb-footer__title">HealLink</span>
           <p className="mb-footer__tagline">
             A small step toward your wellness, every day.
           </p>
@@ -45,7 +45,7 @@ export default function Footer() {
       </div>
 
       <div className="mb-footer__bottom">
-        <span>© {year} MindBridge. Built with care for mental wellness.</span>
+        <span>© {year} HealLink. Built with care for mental wellness.</span>
       </div>
     </footer>
   );

@@ -26,7 +26,7 @@ export default function Navbar() {
       <div className="mb-navbar__inner">
         <NavLink to="/" className="mb-navbar__brand" onClick={() => setOpen(false)}>
           <BrandMark />
-          <span>MindBridge</span>
+          <span>HealLink</span>
         </NavLink>
 
         <nav className={`mb-navbar__links ${open ? "is-open" : ""}`}>
