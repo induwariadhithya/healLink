@@ -150,3 +150,116 @@
   .mb-hero__ctas { justify-content: center; }
   .mb-features { grid-template-columns: 1fr; }
 }
+.mb-feature-card {
+  overflow: hidden;
+}
+
+.mb-feature-card__img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: var(--mb-radius-sm);
+  margin-bottom: 16px;
+  display: block;
+  background: var(--mb-bg);
+}
+/* --- Why HealLink section --- */
+.mb-about {
+  max-width: var(--mb-max-width);
+  margin: 0 auto;
+  padding: 40px 24px 96px;
+  display: flex;
+  align-items: center;
+  gap: 56px;
+}
+
+.mb-about__image {
+  flex: 1;
+  border-radius: var(--mb-radius);
+  overflow: hidden;
+  box-shadow: var(--mb-shadow);
+}
+
+.mb-about__image img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.mb-about__text {
+  flex: 1;
+}
+
+.mb-about__text h2 {
+  margin-top: 12px;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.mb-about__text p {
+  margin-top: 18px;
+  font-size: 1rem;
+  color: var(--mb-text-muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .mb-about {
+    flex-direction: column;
+    text-align: center;
+  }
+  .mb-about__image img {
+    height: 260px;
+  }
+}
+/* --- Final CTA --- */
+.mb-cta {
+  position: relative;
+  max-width: var(--mb-max-width);
+  margin: 0 auto 80px;
+  padding: 72px 24px;
+  border-radius: var(--mb-radius);
+  background: var(--mb-ink);
+  text-align: center;
+  overflow: hidden;
+}
+
+.mb-cta__circle {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: rgba(110, 154, 130, 0.25);
+}
+
+.mb-cta h2 {
+  position: relative;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.mb-cta p {
+  position: relative;
+  margin-top: 12px;
+  color: #C7C4E3;
+  font-size: 1.05rem;
+}
+
+.mb-cta .mb-btn--light {
+  position: relative;
+  display: inline-block;
+  margin-top: 26px;
+  background: #fff;
+  color: var(--mb-ink);
+}
+
+.mb-cta .mb-btn--light:hover {
+  background: var(--mb-gold);
+  color: #fff;
+}
