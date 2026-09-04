@@ -177,3 +177,34 @@
   .mb-dash__week-grid { max-width: 100%; }
   .mb-dash__week-dot { width: 26px; height: 26px; }
 }
+.mb-stat-card__icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(110, 154, 130, 0.15);
+  color: var(--mb-sage-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.mb-dash__week-legend {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.mb-dash__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--mb-text-muted);
+}
+
+.mb-dash__legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}

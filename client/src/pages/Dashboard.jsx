@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Smile, BookOpen, HeartPulse } from "lucide-react";
+import { Smile, BookOpen, HeartPulse, Flame, NotebookText, Sparkles } from "lucide-react";
 import "./Dashboard.css";
 
 
@@ -30,11 +30,16 @@ const weeklyMood = [
   { day: "Sat", color: "#D9A45B" },
   { day: "Sun", color: "#6E9A82" },
 ];
+const MOOD_LEGEND = [
+  { label: "Calm", color: "#6E9A82" },
+  { label: "Okay", color: "#D9A45B" },
+  { label: "Low", color: "#8C8AA8" },
+];
 
 const SUMMARY_CARDS = [
-  { label: "Mood streak", value: `${placeholderStats.moodStreakDays} days`, accent: "sage" },
-  { label: "Journal entries", value: placeholderStats.journalEntries, accent: "gold" },
-  { label: "Last logged mood", value: placeholderStats.lastMood, accent: "sage" },
+  { label: "Mood streak", value: `${placeholderStats.moodStreakDays} days`, accent: "sage", icon: Flame },
+  { label: "Journal entries", value: placeholderStats.journalEntries, accent: "gold", icon: NotebookText },
+  { label: "Last logged mood", value: placeholderStats.lastMood, accent: "sage", icon: Sparkles },
 ];
 
 const QUICK_LINKS = [
@@ -60,23 +65,34 @@ export default function Dashboard() {
 </header>
 
       <section className="mb-dash__stats">
-        {SUMMARY_CARDS.map((card) => (
-          <div className={`mb-stat-card mb-stat-card--${card.accent}`} key={card.label}>
-            <span className="mb-stat-card__value">{card.value}</span>
-            <span className="mb-stat-card__label">{card.label}</span>
-          </div>
-        ))}
+       {SUMMARY_CARDS.map((card) => {
+  const Icon = card.icon;
+  return (
+    <div className={`mb-stat-card mb-stat-card--${card.accent}`} key={card.label}>
+      <div className="mb-stat-card__icon">
+        <Icon size={18} />
+      </div>
+      <span className="mb-stat-card__value">{card.value}</span>
+      <span className="mb-stat-card__label">{card.label}</span>
+    </div>
+  );
+})}
       </section>
       
-      <section className="mb-dash__week">
+     <section className="mb-dash__week">
   <h2>This week</h2>
+  <div className="mb-dash__week-legend">
+    {MOOD_LEGEND.map((m) => (
+      <span key={m.label} className="mb-dash__legend-item">
+        <span className="mb-dash__legend-dot" style={{ background: m.color }} />
+        {m.label}
+      </span>
+    ))}
+  </div>
   <div className="mb-dash__week-grid">
     {weeklyMood.map((d) => (
       <div className="mb-dash__week-day" key={d.day}>
-        <div
-          className="mb-dash__week-dot"
-          style={{ background: d.color }}
-        />
+        <div className="mb-dash__week-dot" style={{ background: d.color }} />
         <span>{d.day}</span>
       </div>
     ))}
