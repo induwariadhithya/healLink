@@ -1,5 +1,8 @@
 import { useState, useRef } from "react";
 import "./Journal.css";
+import journalImage1 from "../assets/images/j1.jpeg";
+import journalImage2 from "../assets/images/j2.jpeg";
+import journalImage3 from "../assets/images/j3.jpeg";
 
 export default function Journal() {
   const entriesListRef = useRef(null);
@@ -16,8 +19,8 @@ export default function Journal() {
       date: "Oct 26",
       title: "Sunrise Walk",
       mood: "😄",
-      image:
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
+      image: journalImage1,
+      quote: "Every new day brings a fresh reason to be grateful.",
       thoughts: "",
       tags: ["#gratitude", "#work"],
     },
@@ -26,8 +29,8 @@ export default function Journal() {
       date: "Oct 24",
       title: "Book & Tea",
       mood: "😄",
-      image:
-        "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&h=300&fit=crop",
+      image: journalImage2,
+      quote: "Slow moments can be the ones that restore us most.",
       thoughts: "",
       tags: ["#gratitude", "#work"],
     },
@@ -36,19 +39,10 @@ export default function Journal() {
       date: "Oct 11",
       title: "Seascape",
       mood: "😌",
-      image:
-        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop",
+      image: journalImage3,
+      quote: "Breathe deeply and let the calm find you.",
       thoughts: "",
       tags: ["#gratitude", "#family"],
-    },
-    {
-      id: 4,
-      date: "Oct 10, 2023",
-      title: "Daily Thoughts",
-      mood: "😌",
-      image: null,
-      thoughts: "Happy thoughts. I'd wor. I can meanly nothing and peace...",
-      tags: ["#gratitude", "#work"],
     },
   ]);
   const [newestEntryId, setNewestEntryId] = useState(null);
@@ -75,6 +69,7 @@ export default function Journal() {
       title: title,
       mood: mood || "😌",
       image: null,
+      quote: grateful || "Take a moment to appreciate how far you have come.",
       thoughts: thoughts,
       tags: ["#gratitude"],
     };
@@ -206,46 +201,49 @@ export default function Journal() {
           </div>
         </div>
 
-        {/* Right Section - Past Entries */}
+        {/* Right Section - Images and Past Entries */}
         <div className="entries-section">
-          <h2>Past Entries</h2>
-          <div className="entries-list" ref={entriesListRef}>
-            {entries.map((entry) => (
-              <div key={entry.id} className={`entry-card ${newestEntryId === entry.id ? "new-entry" : ""}`}>
-                {entry.image && (
-                  <img src={entry.image} alt={entry.title} className="entry-image" />
-                )}
-                <div className="entry-content">
-                  <div className="entry-header">
-                    <span className="entry-date">{entry.date}</span>
-                    {!entry.image && <span className="entry-mood">{entry.mood}</span>}
-                  </div>
-                  <h3 className="entry-title">{entry.title}</h3>
-                  {entry.thoughts && (
-                    <p className="entry-thoughts">{entry.thoughts}</p>
-                  )}
-                  <div className="entry-tags">
-                    {entry.tags.map((tag, idx) => (
-                      <span key={idx} className="tag">
-                        {tag}
-                      </span>
-                    ))}
+          <div className="journal-images">
+            <h2>Moments</h2>
+            <div className="image-gallery">
+              {entries.filter((entry) => entry.image).map((entry) => (
+                <div key={entry.id} className="image-card">
+                  <div className="entry-image-wrap">
+                    <img src={entry.image} alt={entry.title} className="entry-image" />
+                    <div className="entry-quote" role="tooltip">
+                      {entry.quote}
+                    </div>
                   </div>
                 </div>
-                <div className="entry-actions">
-                  <button className="btn-edit" title="Edit">
-                    ✏️
-                  </button>
-                  <button
-                    className="btn-delete"
-                    title="Delete"
-                    onClick={() => handleDeleteEntry(entry.id)}
-                  >
-                    🗑️
-                  </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="past-entries">
+            <h2>Past Entries</h2>
+            <div className="entries-list" ref={entriesListRef}>
+              {entries.map((entry) => (
+                <div key={entry.id} className={`entry-card ${newestEntryId === entry.id ? "new-entry" : ""}`}>
+                  <div className="entry-content">
+                    <div className="entry-header">
+                      <span className="entry-date">{entry.date}</span>
+                      <span className="entry-mood">{entry.mood}</span>
+                    </div>
+                    <h3 className="entry-title">{entry.title}</h3>
+                    {entry.thoughts && (
+                      <p className="entry-thoughts">{entry.thoughts}</p>
+                    )}
+                    <div className="entry-tags">
+                      {entry.tags.map((tag, idx) => (
+                        <span key={idx} className="tag">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

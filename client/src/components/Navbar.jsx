@@ -15,6 +15,7 @@ const NAV_LINKS = [
   { to: "/dashboard", label: "Dashboard" },
   { to: "/mood-tracker", label: "Mood Tracker" },
   { to: "/journal", label: "Journal" },
+  { to: "/wellness-hub", label: "Wellness Hub" },
   { to: "/stress", label: "Stress Support" },
 ];
 

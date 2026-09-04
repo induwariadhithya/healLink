@@ -1,6 +1,6 @@
 .journal-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5e6d3 0%, #e8d4c4 50%, #f0d9c8 100%);
+  background: linear-gradient(135deg, var(--mb-bg) 0%, #eef4f0 56%, #fbf3e5 100%);
   padding: 40px 20px;
   position: relative;
   overflow-x: hidden;
@@ -39,8 +39,9 @@
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
   position: relative;
   z-index: 1;
 }
@@ -257,37 +258,43 @@
   gap: 20px;
 }
 
+.journal-images,
+.past-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.image-card {
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  aspect-ratio: 4 / 3;
+}
+
+.image-card .entry-image {
+  height: 100%;
+}
+
 .entries-section h2 {
   font-size: 28px;
   color: #2d3e50;
   margin-bottom: 10px;
   font-weight: 600;
+  text-align: center;
 }
 
 .entries-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-height: calc(100vh - 300px);
-  overflow-y: auto;
-  padding-right: 10px;
-}
-
-.entries-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.entries-list::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.entries-list::-webkit-scrollbar-thumb {
-  background: #c9b8a3;
-  border-radius: 10px;
-}
-
-.entries-list::-webkit-scrollbar-thumb:hover {
-  background: #8b9a8f;
+  padding-right: 0;
 }
 
 /* Entry Card */
@@ -329,6 +336,33 @@
   height: 180px;
   object-fit: cover;
   display: block;
+}
+
+.entry-image-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.entry-quote {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(24, 39, 48, 0.72);
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.entry-image-wrap:hover .entry-quote,
+.entry-image-wrap:focus-within .entry-quote {
+  opacity: 1;
 }
 
 .entry-content {
@@ -441,6 +475,10 @@
     gap: 30px;
   }
 
+  .image-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .reflection-section {
     position: static;
     top: auto;
@@ -485,6 +523,10 @@
 
   .entries-list {
     max-height: none;
+  }
+
+  .image-gallery {
+    grid-template-columns: 1fr;
   }
 
   .form-actions {
