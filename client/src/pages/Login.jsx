@@ -7,14 +7,14 @@ import './Login.css';
 export default function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
-  const { loginUser } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await API.post('/auth/login', formData);
-      loginUser(res.data);
+      login(res.data.user, res.data.token);
       navigate('/dashboard'); 
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid Credentials');
