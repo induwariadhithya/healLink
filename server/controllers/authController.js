@@ -4,11 +4,12 @@ const User = require("../models/User");
 const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    const normalizedEmail = String(email || "").trim().toLowerCase();
 
     // Create a new user
     const user = new User({
       name,
-      email,
+      email: normalizedEmail,
       password,
     });
 
@@ -20,6 +21,12 @@ const registerUser = async (req, res) => {
     });
 
   } catch (error) {
+    if (error.code === 11000) {
+      return res.status(409).json({
+        message: "This email is already registered. Please use another email or log in.",
+      });
+    }
+
     res.status(500).json({
       message: error.message,
     });
@@ -30,9 +37,10 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const normalizedEmail = String(email || "").trim().toLowerCase();
 
     // Find user by email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: normalizedEmail });
 
     // Check if user exists
     if (!user) {
