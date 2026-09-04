@@ -9,11 +9,9 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import MoodTracker from "./pages/MoodTracker";
 import Journal from "./pages/Journal";
-
-// TODO (other members): import and add your pages here
-// import Login from "./pages/Login";
-// import Register from "./pages/Register";
-// import Stress from "./pages/Stress";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -21,20 +19,36 @@ function App() {
       <Navbar />
       
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/mood-tracker" element={<MoodTracker />} />
-        <Route path="/journal" element={<Journal />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-        {/* Add teammates' routes below as they push their code */}
-        {/* <Route path="/login" element={<Login />} /> */}
-        {/* <Route path="/register" element={<Register />} /> */}
-        {/* <Route path="/stress" element={<Stress />} */}
+        {/* Protected Routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/mood-tracker"
+          element={
+            <ProtectedRoute>
+              <MoodTracker />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/journal" element={<Journal />} />
+        {/* <Route path="/stress" element={<Stress />} /> */}
       </Routes>
 
       <Footer />
     </BrowserRouter>
   );
 }
+
 
 export default App;
