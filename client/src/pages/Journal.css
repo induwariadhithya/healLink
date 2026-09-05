@@ -72,7 +72,7 @@
   margin: 0 0 22px;
   font-size: clamp(1.65rem, 2vw, 2.35rem);
   line-height: 1.2;
-  color: #2f2d2b;
+  color: var(--mb-ink);
   font-weight: 700;
   font-family: "Georgia", "Times New Roman", serif;
 }
@@ -85,7 +85,7 @@
   display: block;
   margin-bottom: 10px;
   font-size: 0.95rem;
-  color: #2f2d2b;
+  color: var(--mb-text);
   font-weight: 600;
 }
 
@@ -96,7 +96,7 @@
   background: rgba(255, 255, 255, 0.15);
   border: 1.5px solid #d0b290;
   border-radius: 12px;
-  color: #2d2d2d;
+  color: var(--mb-text);
   font: inherit;
 }
 
@@ -124,7 +124,7 @@
   background: rgba(255, 255, 255, 0.16);
   border: 1.5px solid #d0b290;
   border-radius: 12px;
-  color: #2d2d2d;
+  color: var(--mb-text);
   cursor: pointer;
   transition: 0.2s ease;
 }
@@ -230,7 +230,7 @@
   margin: 8px 0 18px;
   text-align: center;
   font-size: clamp(1.6rem, 1.8vw, 2.25rem);
-  color: #2d2d2d;
+  color: var(--mb-ink);
   font-weight: 700;
   font-family: "Georgia", "Times New Roman", serif;
 }
@@ -284,7 +284,7 @@
 
 .entry-date {
   font-size: 0.88rem;
-  color: #3b3b3b;
+  color: var(--mb-text-muted);
   font-weight: 500;
 }
 
@@ -298,7 +298,7 @@
 
 .entry-title {
   font-size: 1.05rem;
-  color: #2d2d2d;
+  color: var(--mb-ink);
   font-weight: 600;
 }
 
@@ -345,7 +345,7 @@
 .entry-text-row p {
   margin: 0;
   font-size: 0.88rem;
-  color: #3a3a3a;
+  color: var(--mb-text);
   line-height: 1.5;
 }
 
