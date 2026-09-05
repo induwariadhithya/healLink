@@ -1,45 +1,269 @@
-.auth-container {
+.register-page {
+  min-height: 720px;
+  padding: 54px 24px 72px;
+  background: #e8eee8;
+  display: grid;
+  place-items: center;
+}
+
+.register-shell {
+  width: min(1080px, 100%);
+  min-height: 610px;
+  display: grid;
+  grid-template-columns: minmax(390px, 0.94fr) minmax(0, 1.06fr);
+  background: #fffdf9;
+  border: 1px solid rgba(49, 70, 57, 0.12);
+  box-shadow: 0 24px 60px rgba(54, 63, 48, 0.14);
+  overflow: hidden;
+}
+
+.register-panel {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  padding: 48px clamp(32px, 5vw, 68px);
+  background: #fffdf9;
+}
+
+.register-brand {
+  display: flex;
   align-items: center;
-  height: 80vh;
+  gap: 10px;
+  margin-bottom: 48px;
+  color: #314d3d;
+  font-family: var(--mb-font-display);
+  font-size: 1.12rem;
+  font-weight: 600;
 }
 
-.auth-form {
-  padding: 30px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  width: 320px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.register-mark {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  border-radius: 50%;
+  color: #fffdf9;
+  background: #3d6952;
+  font-family: var(--mb-font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+}
+
+.register-kicker {
+  color: #64836c;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.register-heading h1 {
+  max-width: 390px;
+  margin: 12px 0 12px;
+  color: #263c30;
+  font-size: clamp(2rem, 3.1vw, 3rem);
+  font-weight: 500;
+  line-height: 1.04;
+}
+
+.register-heading > p:last-child {
+  max-width: 390px;
+  color: #7d8278;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.register-form { margin-top: 30px; }
+
+.register-field {
+  display: block;
+  margin-bottom: 17px;
+  color: #3b4c40;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.register-field input {
+  width: 100%;
+  margin-top: 8px;
+  padding: 13px 15px;
+  border: 1px solid #d8ddd3;
+  border-radius: 4px;
+  outline: none;
+  color: #263c30;
   background: #fff;
+  font: inherit;
+  font-size: 0.88rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
+.register-field input::placeholder { color: #afb5ac; }
+.register-field input:focus {
+  border-color: #659174;
+  box-shadow: 0 0 0 3px rgba(101, 145, 116, 0.14);
 }
 
-.auth-btn {
-  width: 100%;
-  padding: 10px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
+.register-password { position: relative; }
+.register-password input { padding-right: 62px; }
+
+.register-password__toggle {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 0;
+  border: 0;
+  color: #5c8067;
+  background: transparent;
   cursor: pointer;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
 }
 
-.error-msg {
-  color: red;
-  font-size: 14px;
+.register-password__toggle:hover { color: #294b38; text-decoration: underline; }
+
+.register-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+  padding: 15px 18px;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  background: #355c4a;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.success-msg {
-  color: #198754;
-  font-size: 14px;
+.register-button:hover:not(:disabled) { background: #294b38; transform: translateY(-1px); }
+.register-button:disabled { cursor: wait; opacity: 0.7; }
+
+.register-message {
+  margin-bottom: 16px;
+  padding: 10px 13px;
+  font-size: 0.78rem;
+}
+
+.register-message--error {
+  border-left: 3px solid #bf6855;
+  color: #a34c3a;
+  background: #fff0eb;
+}
+
+.register-message--success {
+  border-left: 3px solid #5c966b;
+  color: #40704d;
+  background: #edf7ed;
+}
+
+.register-login-link {
+  margin-top: 25px;
+  color: #8a8d84;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.register-login-link a { color: #4e7b5e; font-weight: 700; }
+.register-login-link a:hover { text-decoration: underline; }
+
+.register-story {
+  position: relative;
+  min-height: 610px;
+  overflow: hidden;
+  background: #456b56;
+}
+
+.register-story img,
+.register-story__shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.register-story img {
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.84;
+}
+
+.register-story__shade {
+  background: linear-gradient(150deg, rgba(31, 70, 47, 0.08), rgba(27, 56, 43, 0.88));
+}
+
+.register-story__content {
+  position: absolute;
+  right: 48px;
+  bottom: 48px;
+  left: 48px;
+  color: #fffdf9;
+}
+
+.register-quote-mark {
+  display: block;
+  height: 48px;
+  color: #dfba72;
+  font-family: Georgia, serif;
+  font-size: 5rem;
+  line-height: 1;
+}
+
+.register-story blockquote {
+  max-width: 440px;
+  margin: 0;
+  color: #fffdf9;
+  font-family: var(--mb-font-display);
+  font-size: clamp(1.8rem, 3.1vw, 3.15rem);
+  line-height: 1.04;
+}
+
+.register-story__rule {
+  width: 42px;
+  height: 2px;
+  margin: 24px 0 17px;
+  background: #dfba72;
+}
+
+.register-story__content > p {
+  max-width: 330px;
+  color: rgba(255, 253, 249, 0.8);
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+
+.register-story__badge {
+  position: absolute;
+  top: 34px;
+  right: 38px;
+  left: 38px;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 253, 249, 0.8);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.register-story__badge span:first-child { color: #dfba72; font-weight: 700; }
+
+@media (max-width: 760px) {
+  .register-page { min-height: auto; padding: 28px 16px 48px; }
+  .register-shell { grid-template-columns: 1fr; }
+  .register-panel { padding: 34px 28px 40px; }
+  .register-brand { margin-bottom: 40px; }
+  .register-story { min-height: 360px; }
+  .register-story__content { right: 28px; bottom: 30px; left: 28px; }
+  .register-story blockquote { font-size: 2.35rem; }
+  .register-story__badge { top: 25px; right: 28px; left: 28px; }
+}
+
+@media (max-width: 420px) {
+  .register-story { min-height: 390px; }
 }
