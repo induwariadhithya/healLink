@@ -53,12 +53,20 @@
 }
 
 .login-story__shade {
+  z-index: 2;
   background: linear-gradient(180deg, rgba(59, 51, 111, 0.1) 5%, rgba(36, 31, 82, 0.9) 100%);
 }
 
 .login-story__content {
   position: absolute;
   inset: auto 48px 46px;
+  z-index: 3;
+  padding: 24px 24px 22px;
+  margin: 0 -24px -22px;
+  background: linear-gradient(90deg, rgba(25, 20, 65, 0.76), rgba(25, 20, 65, 0.28), transparent);
+  border-left: 2px solid rgba(199, 185, 255, 0.7);
+  border-radius: 0 8px 8px 0;
+  backdrop-filter: blur(2px);
   color: #fffdf9;
 }
 
@@ -78,6 +86,7 @@
   font-size: clamp(2.6rem, 4.3vw, 4.35rem);
   font-weight: 500;
   line-height: 0.98;
+  text-shadow: 0 2px 18px rgba(15, 11, 38, 0.45);
 }
 
 .login-story p {
@@ -85,6 +94,7 @@
   color: rgba(255, 253, 249, 0.84);
   font-size: 0.98rem;
   line-height: 1.7;
+  text-shadow: 0 1px 10px rgba(15, 11, 38, 0.5);
 }
 
 .login-note {
