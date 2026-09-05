@@ -38,12 +38,17 @@
   opacity: 0.83;
 }
 
-.login-story__image {
-  animation: login-image-fade 0.8s ease;
+.login-story__image--previous {
+  z-index: 0;
 }
 
-@keyframes login-image-fade {
-  from { opacity: 0.35; transform: scale(1.02); }
+.login-story__image--current {
+  z-index: 1;
+  animation: login-image-crossfade 1.4s ease both;
+}
+
+@keyframes login-image-crossfade {
+  from { opacity: 0; transform: scale(1.035); }
   to { opacity: 0.83; transform: scale(1); }
 }
 

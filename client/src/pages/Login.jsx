@@ -22,12 +22,16 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
+  const [previousImageIndex, setPreviousImageIndex] = useState(0);
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     const imageTimer = window.setInterval(() => {
-      setImageIndex((currentIndex) => (currentIndex + 1) % LOGIN_IMAGES.length);
+      setImageIndex((currentIndex) => {
+        setPreviousImageIndex(currentIndex);
+        return (currentIndex + 1) % LOGIN_IMAGES.length;
+      });
     }, 5000);
 
     return () => window.clearInterval(imageTimer);
@@ -52,8 +56,14 @@ export default function Login() {
       <section className="login-shell" aria-label="HealLink sign in">
         <div className="login-story">
           <img
+            className="login-story__image login-story__image--previous"
+            src={LOGIN_IMAGES[previousImageIndex].src}
+            alt=""
+            aria-hidden="true"
+          />
+          <img
             key={LOGIN_IMAGES[imageIndex].src}
-            className="login-story__image"
+            className="login-story__image login-story__image--current"
             src={LOGIN_IMAGES[imageIndex].src}
             alt={LOGIN_IMAGES[imageIndex].alt}
           />
