@@ -2,10 +2,21 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./MoodTracker.css";
 
+const MOOD_STORAGE_KEY = "heallink-moods";
+
+const getStoredMoods = () => {
+  try {
+    return JSON.parse(localStorage.getItem(MOOD_STORAGE_KEY) || "[]");
+  } catch (error) {
+    console.error("Unable to read saved moods", error);
+    return [];
+  }
+};
+
 function MoodTracker() {
   const [mood, setMood] = useState("");
   const [note, setNote] = useState("");
-  const [moods, setMoods] = useState([]);
+  const [moods, setMoods] = useState(getStoredMoods);
 
   const moodOptions = [
     { value: "Happy", emoji: "😄", label: "Happy" },
@@ -20,8 +31,9 @@ function MoodTracker() {
     try {
       const res = await axios.get("http://localhost:5000/api/moods");
       setMoods(res.data);
+      localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(res.data));
     } catch (error) {
-      console.log(error);
+      setMoods(getStoredMoods());
     }
   };
 
@@ -32,37 +44,50 @@ function MoodTracker() {
   // Save mood
   const saveMood = async () => {
     if (!mood) {
-      alert("Please select a mood before saving.");
       return;
     }
 
+    const localMood = {
+      _id: `local-${Date.now()}`,
+      mood,
+      note,
+      date: new Date().toISOString(),
+    };
+
     try {
-      await axios.post("http://localhost:5000/api/moods", {
+      const response = await axios.post("http://localhost:5000/api/moods", {
         mood,
         note,
       });
-
-      alert("Mood Saved Successfully!");
+      const nextMoods = [response.data, ...moods];
+      setMoods(nextMoods);
+      localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(nextMoods));
 
       setMood("");
       setNote("");
-
-      fetchMoods();
     } catch (error) {
-      console.log(error);
-      alert(error.response?.data?.message || "Error saving mood");
+      const nextMoods = [localMood, ...moods];
+      setMoods(nextMoods);
+      localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(nextMoods));
+      setMood("");
+      setNote("");
     }
   };
 
   //delete mood
   const deleteMood = async (id) => {
-  try {
-    await axios.delete(`http://localhost:5000/api/moods/${id}`);
-    fetchMoods();
-  } catch (error) {
-    console.log(error);
+    try {
+      if (!String(id).startsWith("local-")) {
+        await axios.delete(`http://localhost:5000/api/moods/${id}`);
+      }
+    } catch (error) {
+      console.error("Unable to delete mood online", error);
+    }
+
+    const nextMoods = moods.filter((item) => item._id !== id);
+    setMoods(nextMoods);
+    localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(nextMoods));
   }
-};
 
   return (
     <main className="mood-container">
