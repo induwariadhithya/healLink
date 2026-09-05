@@ -155,13 +155,14 @@ export default function Journal() {
     };
 
     const previousEntries = getStoredEntries();
-    const nextEntries = [localEntry, ...previousEntries.filter((entry) => !entry.id?.startsWith("local-"))];
+    const nextEntries = [localEntry, ...previousEntries];
 
     try {
       localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(nextEntries));
       setPastEntries(nextEntries);
       setThoughts("");
       setGrateful("");
+      setGoals(["", "", ""]);
       setSaveMessageType("success");
       setSaveMessage("Saved locally. Connect the server to sync online.");
 
