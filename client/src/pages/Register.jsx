@@ -7,16 +7,20 @@ import './Register.css';
 export default function Register() {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
-  const { loginUser } = useContext(AuthContext);
+  const [success, setSuccess] = useState('');
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await API.post('/auth/register', formData);
-      loginUser(res.data);
-      navigate('/dashboard');
+      setError('');
+      setSuccess('Registration successful');
+      login(res.data.user, res.data.token);
+      setTimeout(() => navigate('/dashboard'), 1000);
     } catch (err) {
+      setSuccess('');
       setError(err.response?.data?.message || 'Registration failed');
     }
   };
@@ -26,6 +30,7 @@ export default function Register() {
       <form onSubmit={handleSubmit} className="auth-form">
         <h2>Register for HealLink</h2>
         {error && <p className="error-msg">{error}</p>}
+        {success && <p className="success-msg">{success}</p>}
         
         <div className="form-group">
           <input 
