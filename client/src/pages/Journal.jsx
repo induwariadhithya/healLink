@@ -345,7 +345,18 @@ export default function Journal() {
                 <div className="entry-card text-entry-card" key={entry.id}>
                   <div className="entry-header-row">
                     <span className="entry-date">{entry.date}</span>
-                    <span className="entry-mood">{entry.mood}</span>
+                    <div className="entry-header-actions">
+                      <span className="entry-mood">{entry.mood}</span>
+                      <button
+                        type="button"
+                        className="delete-entry-btn"
+                        onClick={() => deleteEntry(entry)}
+                        aria-label={`Delete ${entry.title}`}
+                        title="Delete entry"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
 
                   <div className="entry-title-row">
@@ -356,13 +367,6 @@ export default function Journal() {
                     <p>{entry.text}</p>
                   </div>
 
-                  <button
-                    type="button"
-                    className="delete-entry-btn"
-                    onClick={() => deleteEntry(entry)}
-                  >
-                    Delete Entry
-                  </button>
                 </div>
               ))}
           </div>
