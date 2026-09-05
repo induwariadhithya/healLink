@@ -25,7 +25,10 @@ export default function Register() {
       login(res.data.user, res.data.token);
       setTimeout(() => navigate('/dashboard'), 1000);
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      setError(
+        err.response?.data?.message ||
+        (err.request ? 'Cannot connect to the server. Start the backend and try again.' : 'Registration failed')
+      );
       setIsSubmitting(false);
     }
   };

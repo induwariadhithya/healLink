@@ -10,8 +10,6 @@ const moodRoutes = require("./routes/moodRoutes");
 
 dotenv.config({ path: path.join(__dirname, ".env") });
 
-connectDB();
-
 const app = express();
 
 app.use(cors());
@@ -28,6 +26,16 @@ app.use("/api/auth", authRoutes);
 app.use("/api/journals", journalRoutes);
 app.use("/api/moods", moodRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+const startServer = async () => {
+    try {
+        await connectDB();
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    } catch (error) {
+        console.error("Server startup failed:", error.message);
+        process.exit(1);
+    }
+};
+
+startServer();
