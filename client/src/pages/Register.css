@@ -198,7 +198,7 @@
 }
 
 .register-story__shade {
-  background: linear-gradient(150deg, rgba(59, 51, 111, 0.08), rgba(36, 31, 82, 0.9));
+  background: linear-gradient(150deg, rgba(59, 51, 111, 0.04), rgba(36, 31, 82, 0.48));
 }
 
 .register-story__content {
@@ -209,9 +209,9 @@
   padding: 24px 26px 22px;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(31, 27, 73, 0.62), rgba(50, 42, 111, 0.34));
-  box-shadow: 0 16px 34px rgba(20, 16, 53, 0.16);
-  backdrop-filter: blur(3px);
+  background: linear-gradient(135deg, rgba(31, 27, 73, 0.38), rgba(50, 42, 111, 0.16));
+  box-shadow: 0 16px 34px rgba(20, 16, 53, 0.1);
+  backdrop-filter: blur(1px);
   color: #fffdf9;
 }
 
