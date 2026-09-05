@@ -113,3 +113,13 @@
   .mb-navbar__actions { display: none; }
   .mb-navbar__toggle { display: flex; }
 }
+.mb-navbar__link {
+  white-space: nowrap;
+  font-size: 0.85rem;
+  padding: 8px 10px;
+}
+
+.mb-navbar__links {
+  display: flex;
+  gap: 2px;
+}
