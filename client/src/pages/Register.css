@@ -1,7 +1,7 @@
 .register-page {
   min-height: 720px;
   padding: 54px 24px 72px;
-  background: #e8eee8;
+  background: #f1f0fb;
   display: grid;
   place-items: center;
 }
@@ -30,7 +30,7 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 48px;
-  color: #314d3d;
+  color: #39336f;
   font-family: var(--mb-font-display);
   font-size: 1.12rem;
   font-weight: 600;
@@ -43,14 +43,14 @@
   place-items: center;
   border-radius: 50%;
   color: #fffdf9;
-  background: #3d6952;
+  background: #4a438b;
   font-family: var(--mb-font-body);
   font-size: 0.65rem;
   letter-spacing: 0.04em;
 }
 
 .register-kicker {
-  color: #64836c;
+  color: #655ca0;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.13em;
@@ -60,7 +60,7 @@
 .register-heading h1 {
   max-width: 390px;
   margin: 12px 0 12px;
-  color: #263c30;
+  color: #302b60;
   font-size: clamp(2rem, 3.1vw, 3rem);
   font-weight: 500;
   line-height: 1.04;
@@ -78,7 +78,7 @@
 .register-field {
   display: block;
   margin-bottom: 17px;
-  color: #3b4c40;
+  color: #45406d;
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -88,10 +88,10 @@
   width: 100%;
   margin-top: 8px;
   padding: 13px 15px;
-  border: 1px solid #d8ddd3;
+  border: 1px solid #d9d6eb;
   border-radius: 4px;
   outline: none;
-  color: #263c30;
+  color: #302b60;
   background: #fff;
   font: inherit;
   font-size: 0.88rem;
@@ -100,8 +100,8 @@
 
 .register-field input::placeholder { color: #afb5ac; }
 .register-field input:focus {
-  border-color: #659174;
-  box-shadow: 0 0 0 3px rgba(101, 145, 116, 0.14);
+  border-color: #7168b1;
+  box-shadow: 0 0 0 3px rgba(113, 104, 177, 0.14);
 }
 
 .register-password { position: relative; }
@@ -113,7 +113,7 @@
   bottom: 14px;
   padding: 0;
   border: 0;
-  color: #5c8067;
+  color: #655ca0;
   background: transparent;
   cursor: pointer;
   font: inherit;
@@ -121,7 +121,7 @@
   font-weight: 700;
 }
 
-.register-password__toggle:hover { color: #294b38; text-decoration: underline; }
+.register-password__toggle:hover { color: #39336f; text-decoration: underline; }
 
 .register-button {
   display: flex;
@@ -134,7 +134,7 @@
   border: 0;
   border-radius: 4px;
   color: #fff;
-  background: #355c4a;
+  background: #39336f;
   cursor: pointer;
   font: inherit;
   font-size: 0.88rem;
@@ -142,7 +142,7 @@
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.register-button:hover:not(:disabled) { background: #294b38; transform: translateY(-1px); }
+.register-button:hover:not(:disabled) { background: #292552; transform: translateY(-1px); }
 .register-button:disabled { cursor: wait; opacity: 0.7; }
 
 .register-message {
@@ -158,9 +158,9 @@
 }
 
 .register-message--success {
-  border-left: 3px solid #5c966b;
-  color: #40704d;
-  background: #edf7ed;
+  border-left: 3px solid #7168b1;
+  color: #4b4387;
+  background: #f0effb;
 }
 
 .register-login-link {
@@ -170,14 +170,14 @@
   text-align: center;
 }
 
-.register-login-link a { color: #4e7b5e; font-weight: 700; }
+.register-login-link a { color: #5d54a0; font-weight: 700; }
 .register-login-link a:hover { text-decoration: underline; }
 
 .register-story {
   position: relative;
   min-height: 610px;
   overflow: hidden;
-  background: #456b56;
+  background: #4a438b;
 }
 
 .register-story img,
@@ -195,7 +195,7 @@
 }
 
 .register-story__shade {
-  background: linear-gradient(150deg, rgba(31, 70, 47, 0.08), rgba(27, 56, 43, 0.88));
+  background: linear-gradient(150deg, rgba(59, 51, 111, 0.08), rgba(36, 31, 82, 0.9));
 }
 
 .register-story__content {
@@ -209,7 +209,7 @@
 .register-quote-mark {
   display: block;
   height: 48px;
-  color: #dfba72;
+  color: #c7b9ff;
   font-family: Georgia, serif;
   font-size: 5rem;
   line-height: 1;
@@ -228,7 +228,7 @@
   width: 42px;
   height: 2px;
   margin: 24px 0 17px;
-  background: #dfba72;
+  background: #c7b9ff;
 }
 
 .register-story__content > p {
@@ -251,7 +251,7 @@
   text-transform: uppercase;
 }
 
-.register-story__badge span:first-child { color: #dfba72; font-weight: 700; }
+.register-story__badge span:first-child { color: #c7b9ff; font-weight: 700; }
 
 @media (max-width: 760px) {
   .register-page { min-height: auto; padding: 28px 16px 48px; }
