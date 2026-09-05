@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import API from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
-import moodImage from '../assets/images/mood-tracker.jpg';
+import registerImage from '../assets/images/register-wellbeing.jpg';
 import './Register.css';
 
 export default function Register() {
@@ -111,7 +111,7 @@ export default function Register() {
         </div>
 
         <div className="register-story">
-          <img src={moodImage} alt="A calm moment of self-care" />
+          <img src={registerImage} alt="A person meditating beside a calm lake" />
           <div className="register-story__shade" />
           <div className="register-story__content">
             <span className="register-quote-mark">“</span>
