@@ -30,7 +30,8 @@ const startServer = async () => {
     try {
         await connectDB();
     } catch (error) {
-        console.error("MongoDB unavailable. Starting server without database:", error.message);
+        console.error("MongoDB unavailable. Server was not started:", error.message);
+        process.exit(1);
     }
 
     app.listen(PORT, () => {
