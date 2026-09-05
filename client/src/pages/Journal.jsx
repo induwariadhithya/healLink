@@ -1,124 +1,239 @@
-import { useState, useRef } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./Journal.css";
 import journalImage1 from "../assets/images/j1.jpeg";
 import journalImage2 from "../assets/images/j2.jpeg";
 import journalImage3 from "../assets/images/j3.jpeg";
 
+const JOURNAL_STORAGE_KEY = "heallink-journal-entries";
+
+const getStoredEntries = () => {
+  try {
+    const stored = localStorage.getItem(JOURNAL_STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch (error) {
+    console.error("Failed to read saved journal entries", error);
+    return [];
+  }
+};
+
+const mergeEntries = (...entryGroups) => {
+  const entriesById = new Map();
+
+  entryGroups.flat().forEach((entry) => {
+    entriesById.set(entry.id, entry);
+  });
+
+  return Array.from(entriesById.values());
+};
+
+const moodOptions = [
+  { emoji: "😄", label: "Happy" },
+  { emoji: "😌", label: "Calm" },
+  { emoji: "😢", label: "Sad" },
+  { emoji: "😰", label: "Anxious" },
+  { emoji: "🧘", label: "Peaceful" },
+];
+
+const entryHistory = [
+  {
+    id: 1,
+    date: "Aug 31",
+    mood: "😌",
+    title: "New Entry",
+    image: journalImage1,
+    quote: "Every new day brings a fresh reason to be grateful.",
+  },
+  {
+    id: 2,
+    date: "Aug 28",
+    mood: "😊",
+    title: "Morning Reset",
+    image: journalImage2,
+    quote: "Slow moments can be the ones that restore us most.",
+  },
+  {
+    id: 3,
+    date: "Aug 25",
+    mood: "😌",
+    title: "Sunset Walk",
+    image: journalImage3,
+    quote: "Breathe deeply and let the calm find you.",
+  },
+  {
+    id: 4,
+    date: "Oct 10, 2023",
+    mood: "😌",
+    title: "Daily Thoughts",
+    text: "Happy thoughts. I'd work. I can finally stop and rest.",
+  },
+];
+
 export default function Journal() {
-  const entriesListRef = useRef(null);
-  const [selectedDate, setSelectedDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
-  const [mood, setMood] = useState(null);
+  const [selectedDate, setSelectedDate] = useState("2026-08-31");
+  const [mood, setMood] = useState("😌");
   const [thoughts, setThoughts] = useState("");
   const [goals, setGoals] = useState(["", "", ""]);
   const [grateful, setGrateful] = useState("");
-  const [entries, setEntries] = useState([
-    {
-      id: 1,
-      date: "Oct 26",
-      title: "Sunrise Walk",
-      mood: "😄",
-      image: journalImage1,
-      quote: "Every new day brings a fresh reason to be grateful.",
-      thoughts: "",
-      tags: ["#gratitude", "#work"],
-    },
-    {
-      id: 2,
-      date: "Oct 24",
-      title: "Book & Tea",
-      mood: "😄",
-      image: journalImage2,
-      quote: "Slow moments can be the ones that restore us most.",
-      thoughts: "",
-      tags: ["#gratitude", "#work"],
-    },
-    {
-      id: 3,
-      date: "Oct 11",
-      title: "Seascape",
-      mood: "😌",
-      image: journalImage3,
-      quote: "Breathe deeply and let the calm find you.",
-      thoughts: "",
-      tags: ["#gratitude", "#family"],
-    },
-  ]);
-  const [newestEntryId, setNewestEntryId] = useState(null);
+  const [saveMessage, setSaveMessage] = useState("");
+  const [saveMessageType, setSaveMessageType] = useState("success");
+  const [pastEntries, setPastEntries] = useState(() => {
+    const storedEntries = getStoredEntries();
+    return mergeEntries(storedEntries, entryHistory);
+  });
+  const [isSaving, setIsSaving] = useState(false);
 
-  const moods = [
-    { emoji: "😄", label: "Happy" },
-    { emoji: "😌", label: "Calm" },
-    { emoji: "😢", label: "Sad" },
-    { emoji: "😰", label: "Anxious" },
-    { emoji: "🧘", label: "Peaceful" },
-  ];
+  useEffect(() => {
+    const loadEntries = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/journals");
+        const savedEntries = response.data.map((entry) => ({
+          ...entry,
+          id: entry._id,
+          date: new Date(entry.date || entry.createdAt).toLocaleDateString(),
+          title: entry.title || "Daily Reflection",
+          text: entry.content,
+          mood: entry.mood,
+        }));
 
-  const handleSaveEntry = () => {
-    // Create a title from the first few words of thoughts or a default
-    const title = thoughts.slice(0, 30).trim() || "Daily Reflection";
-    
-    const newEntryId = entries.length + 1;
-    const newEntry = {
-      id: newEntryId,
-      date: new Date(selectedDate).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-      }),
-      title: title,
-      mood: mood || "😌",
-      image: null,
-      quote: grateful || "Take a moment to appreciate how far you have come.",
-      thoughts: thoughts,
-      tags: ["#gratitude"],
+        const mergedEntries = mergeEntries(savedEntries, getStoredEntries(), entryHistory);
+        setPastEntries(mergedEntries);
+        localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(mergedEntries));
+      } catch (error) {
+        console.error("Unable to load journal entries", error);
+        setPastEntries(mergeEntries(getStoredEntries(), entryHistory));
+      }
     };
 
-    setEntries([newEntry, ...entries]);
-    setNewestEntryId(newEntryId);
-    resetForm();
-    
-    // Scroll to the top of entries list to show the new entry
-    setTimeout(() => {
-      if (entriesListRef.current) {
-        entriesListRef.current.scrollTop = 0;
-      }
-    }, 0);
-    
-    // Remove highlight after 3 seconds
-    setTimeout(() => {
-      setNewestEntryId(null);
-    }, 3000);
-  };
+    loadEntries();
+  }, []);
 
-  const resetForm = () => {
-    setSelectedDate(new Date().toISOString().split("T")[0]);
-    setMood(null);
-    setThoughts("");
-    setGoals(["", "", ""]);
-    setGrateful("");
-  };
+  useEffect(() => {
+    if (!saveMessage) return;
 
-  const handleDeleteEntry = (id) => {
-    setEntries(entries.filter((entry) => entry.id !== id));
-  };
+    const timeoutId = setTimeout(() => setSaveMessage(""), 3000);
+    return () => clearTimeout(timeoutId);
+  }, [saveMessage]);
 
   const handleGoalChange = (index, value) => {
-    const newGoals = [...goals];
-    newGoals[index] = value;
-    setGoals(newGoals);
+    const nextGoals = [...goals];
+    nextGoals[index] = value;
+    setGoals(nextGoals);
+  };
+
+  const saveEntry = async () => {
+    const content = [
+      thoughts.trim(),
+      grateful.trim() ? `Grateful for: ${grateful.trim()}` : "",
+      goals.filter((goal) => goal.trim()).length
+        ? `Goals for tomorrow: ${goals.filter((goal) => goal.trim()).join(", ")}`
+        : "",
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+
+    if (!content) {
+      setSaveMessageType("error");
+      setSaveMessage("Please write a thought or gratitude before saving.");
+      return;
+    }
+
+    const moodValues = {
+      "😄": "Happy",
+      "😌": "Good",
+      "😢": "Sad",
+      "😰": "Stressed",
+      "🧘": "Good",
+    };
+
+    const localEntry = {
+      id: `local-${Date.now()}`,
+      title: "Daily Reflection",
+      text: content,
+      mood: moodValues[mood] || "Good",
+      date: new Date().toLocaleDateString(),
+    };
+
+    const previousEntries = getStoredEntries();
+    const nextEntries = [localEntry, ...previousEntries.filter((entry) => !entry.id?.startsWith("local-"))];
+
+    try {
+      localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(nextEntries));
+      setPastEntries(nextEntries);
+      setThoughts("");
+      setGrateful("");
+      setSaveMessageType("success");
+      setSaveMessage("Saved locally. Connect the server to sync online.");
+
+      setIsSaving(true);
+      const response = await axios.post("http://localhost:5000/api/journals", {
+        title: "Daily Reflection",
+        content,
+        mood: moodValues[mood] || "Good",
+      });
+
+      const savedEntry = response.data;
+      const apiEntry = {
+        ...savedEntry,
+        id: savedEntry._id,
+        date: new Date(savedEntry.date || savedEntry.createdAt).toLocaleDateString(),
+        title: savedEntry.title,
+        text: savedEntry.content,
+        mood: savedEntry.mood,
+      };
+
+      const refreshedEntries = [apiEntry, ...nextEntries.filter((entry) => entry.id !== localEntry.id)];
+      setPastEntries(refreshedEntries);
+      localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(refreshedEntries));
+      setSaveMessageType("success");
+      setSaveMessage("Journal entry saved successfully.");
+    } catch (error) {
+      setSaveMessageType("warning");
+      setSaveMessage(error.response?.data?.message || "Saved locally. Connect the server to sync online.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const deleteEntry = async (entry) => {
+    const isLocalEntry = String(entry.id).startsWith("local-");
+
+    try {
+      if (!isLocalEntry) {
+        await axios.delete(`http://localhost:5000/api/journals/${entry.id}`);
+      }
+    } catch (error) {
+      console.error("Unable to delete journal entry online", error);
+    }
+
+    const remainingEntries = pastEntries.filter((pastEntry) => pastEntry.id !== entry.id);
+    setPastEntries(remainingEntries);
+    localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(remainingEntries));
+    setSaveMessageType("success");
+    setSaveMessage("Journal entry deleted.");
   };
 
   return (
     <div className="journal-container">
-      <div className="journal-content">
-        {/* Left Section - Daily Reflection Form */}
-        <div className="reflection-section">
-          <h2>Your Daily Reflection</h2>
+      <div className="journal-page">
+        {saveMessage && (
+          <div className={`journal-toast ${saveMessageType}`} role="status" aria-live="polite">
+            <span className="journal-toast-text">{saveMessage}</span>
+            <button
+              type="button"
+              className="journal-toast-close"
+              onClick={() => setSaveMessage("")}
+              aria-label="Close notification"
+            >
+              OK
+            </button>
+          </div>
+        )}
+        <section className="journal-form-panel">
+          <h1>Your Daily Reflection</h1>
 
-          {/* Date Picker */}
-          <div className="form-group">
-            <label>Date picker</label>
+          <div className="field-block">
+            <label>Date Picker</label>
             <input
               type="date"
               value={selectedDate}
@@ -127,51 +242,45 @@ export default function Journal() {
             />
           </div>
 
-          {/* Mood Selection */}
-          <div className="form-group">
-            <label>How are you feeling?</label>
+          <div className="field-block">
+            <label>How Are You Feeling?</label>
             <div className="mood-selector">
-              {moods.map((m) => (
+              {moodOptions.map((item) => (
                 <button
-                  key={m.label}
-                  className={`mood-btn ${mood === m.emoji ? "active" : ""}`}
-                  onClick={() => setMood(m.emoji)}
-                  title={m.label}
+                  key={item.label}
+                  type="button"
+                  className={`mood-btn ${mood === item.emoji ? "active" : ""}`}
+                  onClick={() => setMood(item.emoji)}
+                  title={item.label}
                 >
-                  <span className="mood-emoji">{m.emoji}</span>
-                  <span className="mood-label">{m.label}</span>
+                  <span className="mood-emoji">{item.emoji}</span>
+                  <span className="mood-label">{item.label}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Today's Thoughts */}
-          <div className="form-group">
+          <div className="field-block">
             <label>Today's Thoughts:</label>
             <textarea
               value={thoughts}
               onChange={(e) => setThoughts(e.target.value)}
               placeholder="Write your thoughts here..."
-              className="form-textarea"
+              className="journal-textarea"
             />
           </div>
 
-          {/* Goals for Tomorrow */}
-          <div className="form-group">
+          <div className="field-block">
             <label>Goals for Tomorrow:</label>
-            <div className="goals-list">
+            <div className="goal-list">
               {goals.map((goal, index) => (
-                <div key={index} className="goal-item">
-                  <input
-                    type="checkbox"
-                    id={`goal-${index}`}
-                    className="goal-checkbox"
-                  />
+                <div key={index} className="goal-row">
+                  <input type="checkbox" className="goal-checkbox" defaultChecked readOnly />
                   <input
                     type="text"
                     value={goal}
-                    onChange={(e) => handleGoalChange(index, e.target.value)}
                     placeholder={`Goal ${index + 1}`}
+                    onChange={(e) => handleGoalChange(index, e.target.value)}
                     className="goal-input"
                   />
                 </div>
@@ -179,73 +288,68 @@ export default function Journal() {
             </div>
           </div>
 
-          {/* Grateful For */}
-          <div className="form-group">
+          <div className="field-block">
             <label>Grateful For:</label>
             <textarea
               value={grateful}
               onChange={(e) => setGrateful(e.target.value)}
               placeholder="What are you grateful for today?"
-              className="form-textarea"
+              className="journal-textarea small"
             />
           </div>
 
-          {/* Action Buttons */}
-          <div className="form-actions">
-            <button className="btn-save" onClick={handleSaveEntry}>
-              Save Entry
-            </button>
-            <button className="btn-cancel" onClick={resetForm}>
-              Cancel
-            </button>
-          </div>
-        </div>
+          <button type="button" className="save-entry-btn" onClick={saveEntry} disabled={isSaving}>
+            {isSaving ? "Saving..." : "Save Entry"}
+          </button>
+        </section>
 
-        {/* Right Section - Images and Past Entries */}
-        <div className="entries-section">
-          <div className="journal-images">
-            <h2>Moments</h2>
-            <div className="image-gallery">
-              {entries.filter((entry) => entry.image).map((entry) => (
-                <div key={entry.id} className="image-card">
-                  <div className="entry-image-wrap">
-                    <img src={entry.image} alt={entry.title} className="entry-image" />
-                    <div className="entry-quote" role="tooltip">
-                      {entry.quote}
+        <aside className="journal-entries-panel">
+          <h2>Past Entries</h2>
+
+          <div className="entry-list">
+            <div className="image-entry-grid">
+              {entryHistory
+                .filter((entry) => entry.image)
+                .map((entry) => (
+                  <div className="entry-card image-entry-card" key={entry.id}>
+                    <div className="entry-image-wrap" title="Move your mouse over the image to see the quote">
+                      <img src={entry.image} alt={entry.title} className="entry-image" />
+                      <div className="entry-hover-quote">{entry.quote}</div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
-          </div>
 
-          <div className="past-entries">
-            <h2>Past Entries</h2>
-            <div className="entries-list" ref={entriesListRef}>
-              {entries.map((entry) => (
-                <div key={entry.id} className={`entry-card ${newestEntryId === entry.id ? "new-entry" : ""}`}>
-                  <div className="entry-content">
-                    <div className="entry-header">
-                      <span className="entry-date">{entry.date}</span>
-                      <span className="entry-mood">{entry.mood}</span>
-                    </div>
-                    <h3 className="entry-title">{entry.title}</h3>
-                    {entry.thoughts && (
-                      <p className="entry-thoughts">{entry.thoughts}</p>
-                    )}
-                    <div className="entry-tags">
-                      {entry.tags.map((tag, idx) => (
-                        <span key={idx} className="tag">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+            {pastEntries
+              .filter((entry) => entry.text)
+              .map((entry) => (
+                <div className="entry-card text-entry-card" key={entry.id}>
+                  <div className="entry-header-row">
+                    <span className="entry-date">{entry.date}</span>
+                    <span className="entry-mood">{entry.mood}</span>
                   </div>
+
+                  <div className="entry-title-row">
+                    <span className="entry-title">{entry.title}</span>
+                  </div>
+
+                  <div className="entry-text-row">
+                    <p>{entry.text}</p>
+                  </div>
+
+                  {typeof entry.id === "string" && (
+                    <button
+                      type="button"
+                      className="delete-entry-btn"
+                      onClick={() => deleteEntry(entry)}
+                    >
+                      Delete Entry
+                    </button>
+                  )}
                 </div>
               ))}
-            </div>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   );
