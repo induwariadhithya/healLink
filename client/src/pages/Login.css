@@ -184,7 +184,14 @@
   font-weight: 700;
 }
 
-.password-toggle { position: absolute; right: 14px; bottom: 15px; }
+.password-toggle {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 .password-toggle:hover,
 .forgot-link:hover { color: #39336f; text-decoration: underline; }
 

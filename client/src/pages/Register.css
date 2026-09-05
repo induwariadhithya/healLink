@@ -111,6 +111,9 @@
   position: absolute;
   right: 14px;
   bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
   border: 0;
   color: #655ca0;

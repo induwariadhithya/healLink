@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { Eye, EyeOff } from 'lucide-react';
 import API from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import loginImage from '../assets/images/login-meditation.jpg';
@@ -87,7 +88,7 @@ export default function Login() {
                   onClick={() => setShowPassword((visible) => !visible)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  {showPassword ? 'Hide' : 'Show'}
+                  {showPassword ? <EyeOff size={18} strokeWidth={2} /> : <Eye size={18} strokeWidth={2} />}
                 </button>
               </div>
             </label>
