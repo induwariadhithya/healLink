@@ -36,14 +36,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/mood-tracker"
-          element={
-            <ProtectedRoute>
-              <MoodTracker />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/mood-tracker" element={<MoodTracker />} />
 
         <Route path="/journal" element={<Journal />} />
 

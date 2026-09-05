@@ -12,7 +12,7 @@ function MoodTracker() {
     { value: "Anxious", emoji: "😰", label: "Anxious" },
     { value: "Sad", emoji: "😢", label: "Sad" },
     { value: "Calm", emoji: "😌", label: "Calm" },
-    { value: "Stressed", emoji: "😣", label: "Stressed" },
+    { value: "Angry", emoji: "😡", label: "Angry" },
   ];
 
   // Get all moods
@@ -65,11 +65,9 @@ function MoodTracker() {
 };
 
   return (
-    <div className="mood-container">
+    <main className="mood-container">
       <div className="mood-card">
-        <p className="mood-eyebrow">Daily check-in</p>
         <h1 className="mood-title">Mood Tracker</h1>
-        <p className="mood-intro">Take a moment to notice how you feel today.</p>
 
         <div className="mood-options" aria-label="Choose your mood">
           {moodOptions.map((option) => (
@@ -86,51 +84,48 @@ function MoodTracker() {
           ))}
         </div>
 
-      <textarea
-        className="mood-notes"
-        placeholder="Write your note..."
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
-      />
+        <textarea
+          className="mood-notes"
+          placeholder="Write your note..."
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+        />
 
-      <button onClick={saveMood} disabled={!mood}>
-        Save Mood
-      </button>
-      </div>
+        <button className="save-mood-btn" onClick={saveMood} disabled={!mood}>
+          Save Mood
+        </button>
 
-      <section className="saved-moods">
-        <div className="saved-heading">
-          <p className="mood-eyebrow">Your reflections</p>
+        <section className="saved-moods">
           <h2>Saved Moods</h2>
-        </div>
 
-        {moods.length === 0 ? (
-          <p className="empty-moods">Your saved moods will appear here.</p>
-        ) : (
-          <div className="saved-mood-list">
-            {moods.map((item) => {
-              const option = moodOptions.find((moodOption) => moodOption.value === item.mood);
+          {moods.length === 0 ? (
+            <p className="empty-moods">Your saved moods will appear here.</p>
+          ) : (
+            <div className="saved-mood-list">
+              {moods.map((item) => {
+                const option = moodOptions.find((moodOption) => moodOption.value === item.mood);
 
-              return (
-                <article className="saved-mood-card" key={item._id}>
-                  <div className="saved-mood-icon">{option?.emoji || "🙂"}</div>
-                  <div className="saved-mood-content">
-                    <div className="saved-mood-header">
-                      <h3>{item.mood}</h3>
-                      <time>{new Date(item.createdAt || item.date).toLocaleDateString()}</time>
+                return (
+                  <article className="saved-mood-card" key={item._id}>
+                    <div className="saved-mood-icon">{option?.emoji || "🙂"}</div>
+                    <div className="saved-mood-content">
+                      <div className="saved-mood-header">
+                        <h3>{item.mood}</h3>
+                        <time>{new Date(item.createdAt || item.date).toLocaleDateString()}</time>
+                      </div>
+                      <p>{item.note || "No note added."}</p>
                     </div>
-                    <p>{item.note || "No note added."}</p>
-                  </div>
-                  <button className="delete-mood" onClick={() => deleteMood(item._id)}>
-                    Delete
-                  </button>
-                </article>
-              );
-            })}
-          </div>
-        )}
-      </section>
-    </div>
+                    <button className="delete-mood" onClick={() => deleteMood(item._id)}>
+                      Delete
+                    </button>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+        </section>
+      </div>
+    </main>
   );
 }
 
