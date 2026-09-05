@@ -59,13 +59,10 @@
 
 .login-story__content {
   position: absolute;
-  inset: auto 48px 46px;
+  inset: auto 0 0;
   z-index: 3;
-  padding: 24px 24px 22px;
-  margin: 0 -24px -22px;
-  background: linear-gradient(90deg, rgba(25, 20, 65, 0.76), rgba(25, 20, 65, 0.28), transparent);
-  border-left: 2px solid rgba(199, 185, 255, 0.7);
-  border-radius: 0 8px 8px 0;
+  padding: 34px 48px 38px;
+  background: linear-gradient(180deg, transparent, rgba(25, 20, 65, 0.86) 24%, rgba(25, 20, 65, 0.95));
   backdrop-filter: blur(2px);
   color: #fffdf9;
 }
@@ -285,7 +282,7 @@
   .login-page { min-height: auto; padding: 28px 16px 48px; }
   .login-shell { grid-template-columns: 1fr; }
   .login-story { min-height: 340px; }
-  .login-story__content { inset: auto 28px 30px; }
+  .login-story__content { inset: auto 0 0; padding: 28px 28px 30px; }
   .login-story h1 { font-size: 2.65rem; }
   .login-panel { padding: 34px 28px 40px; }
   .login-panel__topline { margin-bottom: 42px; }
