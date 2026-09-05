@@ -62,7 +62,8 @@
 }
 
 .journal-form-panel {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid var(--mb-border);
   border-radius: 18px;
   padding: 32px 28px 18px;
   min-height: 820px;
@@ -93,9 +94,9 @@
 .journal-textarea,
 .goal-input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1.5px solid #d0b290;
-  border-radius: 12px;
+  background: var(--mb-surface);
+  border: 1.5px solid var(--mb-border);
+  border-radius: var(--mb-radius-sm);
   color: var(--mb-text);
   font: inherit;
 }
@@ -105,7 +106,7 @@
   padding: 0 16px;
   font-size: 0.95rem;
   letter-spacing: 0.03em;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--mb-surface);
 }
 
 .mood-selector {
@@ -121,17 +122,17 @@
   justify-content: center;
   gap: 6px;
   min-height: 88px;
-  background: rgba(255, 255, 255, 0.16);
-  border: 1.5px solid #d0b290;
-  border-radius: 12px;
+  background: var(--mb-surface);
+  border: 1.5px solid var(--mb-border);
+  border-radius: var(--mb-radius-sm);
   color: var(--mb-text);
   cursor: pointer;
   transition: 0.2s ease;
 }
 
 .mood-btn.active {
-  background: #d7c2a3;
-  border-color: #c9a57d;
+  background: #f3efff;
+  border-color: var(--mb-sage);
 }
 
 .mood-emoji {
@@ -165,16 +166,16 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1.5px solid #d0b290;
-  border-radius: 12px;
+  background: var(--mb-surface);
+  border: 1.5px solid var(--mb-border);
+  border-radius: var(--mb-radius-sm);
   padding: 10px 12px;
 }
 
 .goal-checkbox {
   width: 22px;
   height: 22px;
-  accent-color: #4c4c4c;
+  accent-color: var(--mb-sage);
   flex-shrink: 0;
 }
 
@@ -199,7 +200,7 @@
   padding: 14px 18px;
   border: none;
   border-radius: 12px;
-  background: #5c8d68;
+  background: var(--mb-sage);
   color: white;
   font-size: 0.9rem;
   font-weight: 700;
@@ -208,7 +209,7 @@
 }
 
 .save-entry-btn:hover {
-  background: #4c7c59;
+  background: var(--mb-sage-dark);
 }
 
 .grateful-block {
@@ -217,7 +218,8 @@
 }
 
 .journal-entries-panel {
-  background: #e7d8c6;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--mb-border);
   border-radius: 18px;
   padding: 18px 18px 22px;
   min-height: 820px;
@@ -256,23 +258,23 @@
 }
 
 .entry-list::-webkit-scrollbar-thumb {
-  background: rgba(95, 78, 67, 0.35);
+  background: rgba(113, 104, 177, 0.35);
   border-radius: 999px;
 }
 
 .entry-card {
-  background: rgba(255, 255, 255, 0.32);
+  background: var(--mb-surface);
   border-radius: 16px;
-  border: 1px solid rgba(117, 104, 92, 0.15);
+  border: 1px solid var(--mb-border);
   overflow: hidden;
 }
 
 .image-entry-card {
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--mb-surface);
 }
 
 .text-entry-card {
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--mb-surface);
 }
 
 .entry-header-row {
@@ -306,7 +308,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: #d8d4d1;
+  background: var(--mb-bg);
   cursor: pointer;
 }
 
@@ -352,10 +354,10 @@
 .delete-entry-btn {
   margin: 0 14px 14px;
   padding: 8px 12px;
-  border: 1px solid rgba(145, 82, 70, 0.45);
+  border: 1px solid rgba(198, 96, 79, 0.45);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.3);
-  color: #8a4c42;
+  background: transparent;
+  color: var(--mb-danger);
   font: inherit;
   font-size: 0.88rem;
   font-weight: 700;
@@ -364,7 +366,7 @@
 }
 
 .delete-entry-btn:hover {
-  background: #8a4c42;
+  background: var(--mb-danger);
   color: #ffffff;
 }
 

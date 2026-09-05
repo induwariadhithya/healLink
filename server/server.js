@@ -29,13 +29,14 @@ app.use("/api/moods", moodRoutes);
 const startServer = async () => {
     try {
         await connectDB();
-        app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
-        });
     } catch (error) {
-        console.error("Server startup failed:", error.message);
+        console.error("MongoDB unavailable. Server was not started:", error.message);
         process.exit(1);
     }
+
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
 };
 
 startServer();
