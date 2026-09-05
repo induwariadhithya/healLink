@@ -6,6 +6,7 @@ import journalImage2 from "../assets/images/j2.jpeg";
 import journalImage3 from "../assets/images/j3.jpeg";
 
 const JOURNAL_STORAGE_KEY = "heallink-journal-entries";
+const DELETED_JOURNAL_STORAGE_KEY = "heallink-deleted-journal-entries";
 
 const getStoredEntries = () => {
   try {
@@ -15,6 +16,21 @@ const getStoredEntries = () => {
     console.error("Failed to read saved journal entries", error);
     return [];
   }
+};
+
+const getDeletedEntryIds = () => {
+  try {
+    const stored = localStorage.getItem(DELETED_JOURNAL_STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch (error) {
+    console.error("Failed to read deleted journal entries", error);
+    return [];
+  }
+};
+
+const filterDeletedEntries = (entries) => {
+  const deletedIds = new Set(getDeletedEntryIds().map(String));
+  return entries.filter((entry) => !deletedIds.has(String(entry.id)));
 };
 
 const mergeEntries = (...entryGroups) => {
@@ -79,7 +95,7 @@ export default function Journal() {
   const [saveMessageType, setSaveMessageType] = useState("success");
   const [pastEntries, setPastEntries] = useState(() => {
     const storedEntries = getStoredEntries();
-    return mergeEntries(storedEntries, entryHistory);
+    return filterDeletedEntries(mergeEntries(storedEntries, entryHistory));
   });
   const [isSaving, setIsSaving] = useState(false);
 
@@ -96,12 +112,12 @@ export default function Journal() {
           mood: entry.mood,
         }));
 
-        const mergedEntries = mergeEntries(savedEntries, getStoredEntries(), entryHistory);
+        const mergedEntries = filterDeletedEntries(mergeEntries(savedEntries, getStoredEntries(), entryHistory));
         setPastEntries(mergedEntries);
         localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(mergedEntries));
       } catch (error) {
         console.error("Unable to load journal entries", error);
-        setPastEntries(mergeEntries(getStoredEntries(), entryHistory));
+        setPastEntries(filterDeletedEntries(mergeEntries(getStoredEntries(), entryHistory)));
       }
     };
 
@@ -155,13 +171,14 @@ export default function Journal() {
     };
 
     const previousEntries = getStoredEntries();
-    const nextEntries = [localEntry, ...previousEntries.filter((entry) => !entry.id?.startsWith("local-"))];
+    const nextEntries = [localEntry, ...previousEntries];
 
     try {
       localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(nextEntries));
       setPastEntries(nextEntries);
       setThoughts("");
       setGrateful("");
+      setGoals(["", "", ""]);
       setSaveMessageType("success");
       setSaveMessage("Saved locally. Connect the server to sync online.");
 
@@ -196,10 +213,10 @@ export default function Journal() {
   };
 
   const deleteEntry = async (entry) => {
-    const isLocalEntry = String(entry.id).startsWith("local-");
+    const isApiEntry = typeof entry.id === "string" && !entry.id.startsWith("local-");
 
     try {
-      if (!isLocalEntry) {
+      if (isApiEntry) {
         await axios.delete(`http://localhost:5000/api/journals/${entry.id}`);
       }
     } catch (error) {
@@ -207,8 +224,10 @@ export default function Journal() {
     }
 
     const remainingEntries = pastEntries.filter((pastEntry) => pastEntry.id !== entry.id);
+    const deletedIds = [...getDeletedEntryIds(), entry.id].map(String);
     setPastEntries(remainingEntries);
     localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(remainingEntries));
+    localStorage.setItem(DELETED_JOURNAL_STORAGE_KEY, JSON.stringify([...new Set(deletedIds)]));
     setSaveMessageType("success");
     setSaveMessage("Journal entry deleted.");
   };
@@ -326,7 +345,18 @@ export default function Journal() {
                 <div className="entry-card text-entry-card" key={entry.id}>
                   <div className="entry-header-row">
                     <span className="entry-date">{entry.date}</span>
-                    <span className="entry-mood">{entry.mood}</span>
+                    <div className="entry-header-actions">
+                      <span className="entry-mood">{entry.mood}</span>
+                      <button
+                        type="button"
+                        className="delete-entry-btn"
+                        onClick={() => deleteEntry(entry)}
+                        aria-label={`Delete ${entry.title}`}
+                        title="Delete entry"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
 
                   <div className="entry-title-row">
@@ -337,15 +367,6 @@ export default function Journal() {
                     <p>{entry.text}</p>
                   </div>
 
-                  {typeof entry.id === "string" && (
-                    <button
-                      type="button"
-                      className="delete-entry-btn"
-                      onClick={() => deleteEntry(entry)}
-                    >
-                      Delete Entry
-                    </button>
-                  )}
                 </div>
               ))}
           </div>
