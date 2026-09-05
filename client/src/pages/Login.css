@@ -38,6 +38,15 @@
   opacity: 0.83;
 }
 
+.login-story__image {
+  animation: login-image-fade 0.8s ease;
+}
+
+@keyframes login-image-fade {
+  from { opacity: 0.35; transform: scale(1.02); }
+  to { opacity: 0.83; transform: scale(1); }
+}
+
 .login-story__shade {
   background: linear-gradient(180deg, rgba(59, 51, 111, 0.1) 5%, rgba(36, 31, 82, 0.9) 100%);
 }

@@ -1,18 +1,37 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import API from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
-import loginImage from '../assets/images/login-meditation.jpg';
+import loginP2 from '../assets/images/login-slide-p2.jpeg';
+import loginP3 from '../assets/images/login-slide-p3.jpg';
+import loginP6 from '../assets/images/login-slide-p6.jpg';
+import loginP5 from '../assets/images/login-slide-p5.jpg';
 import './Login.css';
+
+const LOGIN_IMAGES = [
+  { src: loginP2, alt: 'A person meditating beside a calm lake' },
+  { src: loginP3, alt: 'A peaceful meditation scene at sunset' },
+  { src: loginP6, alt: 'A person finding stillness in nature' },
+  { src: loginP5, alt: 'A quiet reflective moment surrounded by greenery' },
+];
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const imageTimer = window.setInterval(() => {
+      setImageIndex((currentIndex) => (currentIndex + 1) % LOGIN_IMAGES.length);
+    }, 30000);
+
+    return () => window.clearInterval(imageTimer);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +51,12 @@ export default function Login() {
     <main className="login-page">
       <section className="login-shell" aria-label="HealLink sign in">
         <div className="login-story">
-          <img src={loginImage} alt="A person meditating beside a calm lake" />
+          <img
+            key={LOGIN_IMAGES[imageIndex].src}
+            className="login-story__image"
+            src={LOGIN_IMAGES[imageIndex].src}
+            alt={LOGIN_IMAGES[imageIndex].alt}
+          />
           <div className="login-story__shade" />
           <div className="login-story__content">
             <span className="login-eyebrow">A softer way forward</span>
