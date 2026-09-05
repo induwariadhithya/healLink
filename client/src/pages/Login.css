@@ -38,13 +38,32 @@
   opacity: 0.83;
 }
 
+.login-story__image--previous {
+  z-index: 0;
+}
+
+.login-story__image--current {
+  z-index: 1;
+  animation: login-image-crossfade 1.4s ease both;
+}
+
+@keyframes login-image-crossfade {
+  from { opacity: 0; transform: scale(1.035); }
+  to { opacity: 0.83; transform: scale(1); }
+}
+
 .login-story__shade {
+  z-index: 2;
   background: linear-gradient(180deg, rgba(59, 51, 111, 0.1) 5%, rgba(36, 31, 82, 0.9) 100%);
 }
 
 .login-story__content {
   position: absolute;
-  inset: auto 48px 46px;
+  inset: auto 0 0;
+  z-index: 3;
+  padding: 34px 48px 38px;
+  background: linear-gradient(180deg, transparent, rgba(25, 20, 65, 0.86) 24%, rgba(25, 20, 65, 0.95));
+  backdrop-filter: blur(2px);
   color: #fffdf9;
 }
 
@@ -64,6 +83,7 @@
   font-size: clamp(2.6rem, 4.3vw, 4.35rem);
   font-weight: 500;
   line-height: 0.98;
+  text-shadow: 0 2px 18px rgba(15, 11, 38, 0.45);
 }
 
 .login-story p {
@@ -71,6 +91,7 @@
   color: rgba(255, 253, 249, 0.84);
   font-size: 0.98rem;
   line-height: 1.7;
+  text-shadow: 0 1px 10px rgba(15, 11, 38, 0.5);
 }
 
 .login-note {
@@ -184,7 +205,14 @@
   font-weight: 700;
 }
 
-.password-toggle { position: absolute; right: 14px; bottom: 15px; }
+.password-toggle {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 .password-toggle:hover,
 .forgot-link:hover { color: #39336f; text-decoration: underline; }
 
@@ -254,7 +282,7 @@
   .login-page { min-height: auto; padding: 28px 16px 48px; }
   .login-shell { grid-template-columns: 1fr; }
   .login-story { min-height: 340px; }
-  .login-story__content { inset: auto 28px 30px; }
+  .login-story__content { inset: auto 0 0; padding: 28px 28px 30px; }
   .login-story h1 { font-size: 2.65rem; }
   .login-panel { padding: 34px 28px 40px; }
   .login-panel__topline { margin-bottom: 42px; }
