@@ -70,7 +70,7 @@
 
 .journal-form-panel h1 {
   margin: 0 0 22px;
-  font-size: clamp(2rem, 2.4vw, 3.2rem);
+  font-size: clamp(1.65rem, 2vw, 2.35rem);
   line-height: 1.2;
   color: #2f2d2b;
   font-weight: 700;
@@ -84,7 +84,7 @@
 .field-block label {
   display: block;
   margin-bottom: 10px;
-  font-size: 1.15rem;
+  font-size: 0.95rem;
   color: #2f2d2b;
   font-weight: 600;
 }
@@ -103,7 +103,7 @@
 .date-input {
   height: 54px;
   padding: 0 16px;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   letter-spacing: 0.03em;
   background: rgba(255, 255, 255, 0.08);
 }
@@ -135,12 +135,12 @@
 }
 
 .mood-emoji {
-  font-size: 2rem;
+  font-size: 1.55rem;
   line-height: 1;
 }
 
 .mood-label {
-  font-size: 0.95rem;
+  font-size: 0.78rem;
   font-weight: 600;
 }
 
@@ -148,7 +148,7 @@
   min-height: 118px;
   padding: 14px 16px;
   resize: vertical;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .journal-textarea.small {
@@ -184,7 +184,7 @@
   padding: 0 12px;
   border: none;
   background: transparent;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .goal-input:focus,
@@ -201,7 +201,7 @@
   border-radius: 12px;
   background: #5c8d68;
   color: white;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
   transition: background 0.2s ease;
@@ -229,7 +229,7 @@
 .journal-entries-panel h2 {
   margin: 8px 0 18px;
   text-align: center;
-  font-size: clamp(2rem, 2vw, 3rem);
+  font-size: clamp(1.6rem, 1.8vw, 2.25rem);
   color: #2d2d2d;
   font-weight: 700;
   font-family: "Georgia", "Times New Roman", serif;
@@ -283,13 +283,13 @@
 }
 
 .entry-date {
-  font-size: 1.05rem;
+  font-size: 0.88rem;
   color: #3b3b3b;
   font-weight: 500;
 }
 
 .entry-mood {
-  font-size: 1.8rem;
+  font-size: 1.45rem;
 }
 
 .entry-title-row {
@@ -297,7 +297,7 @@
 }
 
 .entry-title {
-  font-size: 1.3rem;
+  font-size: 1.05rem;
   color: #2d2d2d;
   font-weight: 600;
 }
@@ -327,7 +327,7 @@
   background: rgba(25, 25, 25, 0.42);
   color: #ffffff;
   text-align: center;
-  font-size: 0.98rem;
+  font-size: 0.85rem;
   line-height: 1.4;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -344,7 +344,7 @@
 
 .entry-text-row p {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.88rem;
   color: #3a3a3a;
   line-height: 1.5;
 }
