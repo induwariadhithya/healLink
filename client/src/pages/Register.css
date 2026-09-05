@@ -203,9 +203,15 @@
 
 .register-story__content {
   position: absolute;
-  right: 48px;
-  bottom: 48px;
-  left: 48px;
+  right: 28px;
+  bottom: 28px;
+  left: 28px;
+  padding: 24px 26px 22px;
+  border: 1px solid rgba(227, 221, 255, 0.24);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(31, 27, 73, 0.78), rgba(50, 42, 111, 0.56));
+  box-shadow: 0 16px 34px rgba(20, 16, 53, 0.2);
+  backdrop-filter: blur(5px);
   color: #fffdf9;
 }
 
@@ -219,12 +225,14 @@
 }
 
 .register-story blockquote {
-  max-width: 440px;
+  max-width: 480px;
   margin: 0;
   color: #fffdf9;
   font-family: var(--mb-font-display);
-  font-size: clamp(1.8rem, 3.1vw, 3.15rem);
-  line-height: 1.04;
+  font-size: clamp(1.65rem, 2.8vw, 2.7rem);
+  line-height: 1.12;
+  text-wrap: balance;
+  text-shadow: 0 2px 14px rgba(15, 11, 38, 0.32);
 }
 
 .register-story__rule {
@@ -235,10 +243,11 @@
 }
 
 .register-story__content > p {
-  max-width: 330px;
+  max-width: 390px;
+  margin-top: 16px;
   color: rgba(255, 253, 249, 0.8);
-  font-size: 0.85rem;
-  line-height: 1.65;
+  font-size: 0.82rem;
+  line-height: 1.55;
 }
 
 .register-story__badge {
@@ -262,8 +271,8 @@
   .register-panel { padding: 34px 28px 40px; }
   .register-brand { margin-bottom: 40px; }
   .register-story { min-height: 360px; }
-  .register-story__content { right: 28px; bottom: 30px; left: 28px; }
-  .register-story blockquote { font-size: 2.35rem; }
+  .register-story__content { right: 18px; bottom: 18px; left: 18px; padding: 20px 20px 18px; }
+  .register-story blockquote { font-size: 2rem; }
   .register-story__badge { top: 25px; right: 28px; left: 28px; }
 }
 
