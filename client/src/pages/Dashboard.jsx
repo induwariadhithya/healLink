@@ -9,6 +9,7 @@ import cardStreakImg from "../assets/images/card-streak.jpg";
 import cardJournalImg from "../assets/images/card-journal.jpg";
 import cardMoodImg from "../assets/images/card-mood.jpg";
 import weekBgImg from "../assets/images/week-bg.jpg";
+import { useAuth } from "../context/AuthContext";
 import "./Dashboard.css";
 
 // TODO: replace with real data once Member 2 (mood) & Member 3 (journal)
@@ -66,6 +67,8 @@ const QUICK_LINKS = [
 ];
 
 export default function Dashboard() {
+  const { user } = useAuth();
+  const displayName = user?.name || "Friend";
   return (
     <main className="mb-dash">
 
@@ -81,14 +84,14 @@ export default function Dashboard() {
           <div className="mb-dash__header-row">
             <div>
               <span className="mb-dash__eyebrow">Dashboard</span>
-              <h1>{getGreeting()}, {placeholderStats.userName}</h1>
+              <h1>{getGreeting()}, {displayName}</h1>
               <p>Here's a quick look at how you've been doing.</p>
             </div>
             <div className="mb-dash__header-right">
               <span className="mb-dash__date">{getFormattedDate()}</span>
               <div className="mb-dash__avatar">
-                {placeholderStats.userName.charAt(0)}
-              </div>
+  {displayName.charAt(0).toUpperCase()}
+</div>
             </div>
           </div>
         </header>
