@@ -28,7 +28,7 @@ export default function Login() {
   useEffect(() => {
     const imageTimer = window.setInterval(() => {
       setImageIndex((currentIndex) => (currentIndex + 1) % LOGIN_IMAGES.length);
-    }, 30000);
+    }, 5000);
 
     return () => window.clearInterval(imageTimer);
   }, []);
