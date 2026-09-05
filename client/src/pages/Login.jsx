@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import API from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
-import journalImage from '../assets/images/journal.jpg';
+import loginImage from '../assets/images/login-meditation.jpg';
 import './Login.css';
 
 export default function Login() {
@@ -31,7 +31,7 @@ export default function Login() {
     <main className="login-page">
       <section className="login-shell" aria-label="HealLink sign in">
         <div className="login-story">
-          <img src={journalImage} alt="A quiet space for personal reflection" />
+          <img src={loginImage} alt="A person meditating beside a calm lake" />
           <div className="login-story__shade" />
           <div className="login-story__content">
             <span className="login-eyebrow">A softer way forward</span>
