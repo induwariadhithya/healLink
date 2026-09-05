@@ -115,7 +115,7 @@ export default function Register() {
           <img src={registerImage} alt="A person meditating beside a calm lake" />
           <div className="register-story__shade" />
           <div className="register-story__content">
-            <blockquote>Small moments of awareness can change the way a whole day feels.&rdquo;</blockquote>
+            <blockquote>“Small moments of awareness can change the way a whole day feels.”</blockquote>
             <p>One quiet place for the thoughts, moods, and progress that matter to you.</p>
           </div>
           <div className="register-story__badge">
