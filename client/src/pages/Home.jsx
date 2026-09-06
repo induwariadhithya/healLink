@@ -3,6 +3,7 @@ import journalImg from "../assets/images/journal.jpg";
 import stressImg from "../assets/images/stress-support.jpg";
 import aboutImg from "../assets/images/about-section1.jpg";
 import wellnessHubImg from "../assets/images/wellness-hub-card.jpg";
+import aboutImg2 from "../assets/images/about-section2.jpg";
 import "./Home.css";
 
 const FEATURES = [
@@ -79,7 +80,8 @@ export default function Home() {
       {/* --- Why HealLink --- */}
 <section className="mb-about">
   <div className="mb-about__image">
-    <img src={aboutImg} alt="Student relaxing peacefully" />
+    <img src={aboutImg} alt="Student relaxing peacefully" className="mb-about__img mb-about__img--one" />
+    <img src={aboutImg2} alt="Person enjoying calm outdoors" className="mb-about__img mb-about__img--two" />
   </div>
   <div className="mb-about__text">
     <span className="mb-hero__eyebrow">Why HealLink</span>
