@@ -10,10 +10,11 @@
 .mb-navbar__inner {
   max-width: var(--mb-max-width);
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 12px 24px;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
+  flex-wrap: nowrap;
 }
 
 .mb-navbar__brand {
@@ -62,6 +63,7 @@
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--mb-ink);
+  white-space: nowrap;
 }
 
 .mb-navbar__cta-btn {
@@ -72,6 +74,7 @@
   background: var(--mb-ink);
   border-radius: 999px;
   transition: transform 0.15s ease, background 0.15s ease;
+   white-space: nowrap;
 }
 
 .mb-navbar__cta-btn:hover {
@@ -122,4 +125,10 @@
 .mb-navbar__links {
   display: flex;
   gap: 2px;
+}
+.mb-navbar__logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
