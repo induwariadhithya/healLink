@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";import moodImg from "../assets/images/mo
 import journalImg from "../assets/images/journal.jpg";
 import stressImg from "../assets/images/stress-support.jpg";
 import aboutImg from "../assets/images/about-section1.jpg";
+import wellnessHubImg from "../assets/images/wellness-hub-card.jpg";
 import "./Home.css";
 
 const FEATURES = [
@@ -22,6 +23,12 @@ const FEATURES = [
     desc: "Quick quizzes, calming quotes, and articles when you need them.",
     to: "/stress",
     image: stressImg,
+  },
+  {
+    title: "Wellness Hub",
+    desc: "Explore tips, resources, and tools for everyday wellbeing.",
+    to: "/wellness-hub",
+    image: wellnessHubImg,
   },
 ];
 
@@ -51,10 +58,11 @@ export default function Home() {
 
         {/* Signature element: a slow "breathing" circle — echoes guided breathing exercises */}
         <div className="mb-hero__visual" aria-hidden="true">
-          <div className="mb-breathe mb-breathe--outer" />
-          <div className="mb-breathe mb-breathe--mid" />
-          <div className="mb-breathe mb-breathe--inner" />
-        </div>
+  <div className="mb-breathe mb-breathe--outer" />
+  <div className="mb-breathe mb-breathe--mid" />
+  <div className="mb-breathe mb-breathe--inner" />
+  <span className="mb-breathe__text">Breathe</span>
+</div>
       </section>
 
       {/* --- Features --- */}

@@ -21,26 +21,17 @@ export default function Footer() {
             <Link to="/mood-tracker">Mood Tracker</Link>
             <Link to="/journal">Journal</Link>
             <Link to="/stress">Stress Support</Link>
+            <Link to="/wellness-hub">Wellness Hub</Link>
           </div>
 
           <div className="mb-footer__col">
-            <h4>Support</h4>
-            <a href="#!">Help Center</a>
-            <a href="#!">Contact Us</a>
-            <a href="#!">Privacy Policy</a>
-          </div>
+  <h4>Support</h4>
+  <span className="mb-footer__muted">Help Center</span>
+  <span className="mb-footer__muted">Contact Us</span>
+  <span className="mb-footer__muted">Privacy Policy</span>
+</div>
 
-          <div className="mb-footer__col">
-            <h4>Project</h4>
-            <a
-              href="https://github.com/induwariadhithya/healLink"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub Repository
-            </a>
-           
-          </div>
+         
         </div>
       </div>
 
