@@ -249,12 +249,13 @@
   position: absolute;
   top: 34px;
   right: 38px;
-  left: 38px;
+  left: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   color: rgba(255, 253, 249, 0.8);
   font-size: 0.68rem;
   letter-spacing: 0.08em;
+  text-align: right;
   text-transform: uppercase;
 }
 
@@ -268,7 +269,7 @@
   .register-story { min-height: 360px; }
   .register-story__content { right: 18px; bottom: 18px; left: 18px; padding: 20px 20px 18px; }
   .register-story blockquote { font-size: 2rem; }
-  .register-story__badge { top: 25px; right: 28px; left: 28px; }
+  .register-story__badge { top: 25px; right: 28px; }
 }
 
 @media (max-width: 420px) {
