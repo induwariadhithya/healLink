@@ -346,7 +346,7 @@
     grid-template-columns: 1fr;
   }
 }
-}.mb-quick-card {
+.mb-quick-card {
   position: relative;
   overflow: hidden;
 }

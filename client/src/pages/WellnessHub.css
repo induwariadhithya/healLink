@@ -1,6 +1,9 @@
 .wellness-support-page {
   min-height: calc(100vh - 120px);
-  background: var(--mb-bg);
+  min-height: calc(100dvh - 120px);
+  background: linear-gradient(135deg, #f7f3ff 0%, #e5def8 48%, #d2c9ed 100%);
+  background-attachment: fixed;
+  background-size: cover;
   padding: 32px 24px 64px;
 }
 
@@ -73,7 +76,7 @@
 .wellness-support-card__video-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: #000;
 }
