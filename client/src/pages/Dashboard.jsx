@@ -111,7 +111,7 @@ export default function Dashboard() {
       .catch((err) => console.error("Failed to fetch moods:", err));
 
     // Fetch journal entries
-    fetch("http://localhost:5000/api/journal")
+    fetch("http://localhost:5000/api/journals")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
