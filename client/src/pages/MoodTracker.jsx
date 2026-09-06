@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./MoodTracker.css";
+import moodImage from "../assets/images/mood.jpg";
+import moodImageOne from "../assets/images/m1.jpeg";
+import moodImageTwo from "../assets/images/m2.jpeg";
+import moodImageThree from "../assets/images/m3.jpeg";
 
 const MOOD_STORAGE_KEY = "heallink-moods";
 
@@ -17,6 +21,10 @@ function MoodTracker() {
   const [mood, setMood] = useState("");
   const [note, setNote] = useState("");
   const [moods, setMoods] = useState(getStoredMoods);
+  const [imageIndex, setImageIndex] = useState(0);
+  const [previousImageIndex, setPreviousImageIndex] = useState(0);
+
+  const moodImages = [moodImageOne, moodImageTwo, moodImageThree, moodImage];
 
   const moodOptions = [
     { value: "Happy", emoji: "😄", label: "Happy" },
@@ -32,13 +40,24 @@ function MoodTracker() {
       const res = await axios.get("http://localhost:5000/api/moods");
       setMoods(res.data);
       localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(res.data));
-    } catch (error) {
+    } catch {
       setMoods(getStoredMoods());
     }
   };
 
   useEffect(() => {
     fetchMoods();
+  }, []);
+
+  useEffect(() => {
+    const imageTimer = window.setInterval(() => {
+      setImageIndex((currentIndex) => {
+        setPreviousImageIndex(currentIndex);
+        return (currentIndex + 1) % moodImages.length;
+      });
+    }, 5000);
+
+    return () => window.clearInterval(imageTimer);
   }, []);
 
   // Save mood
@@ -65,7 +84,7 @@ function MoodTracker() {
 
       setMood("");
       setNote("");
-    } catch (error) {
+    } catch {
       const nextMoods = [localMood, ...moods];
       setMoods(nextMoods);
       localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(nextMoods));
@@ -91,10 +110,36 @@ function MoodTracker() {
 
   return (
     <main className="mood-container">
-      <div className="mood-card">
-        <h1 className="mood-title">Mood Tracker</h1>
+      <div className="mood-shell">
+        <section className="mood-story" aria-label="Mood reflection">
+          <img
+            className="mood-story__image mood-story__image--previous"
+            src={moodImages[previousImageIndex]}
+            alt=""
+            aria-hidden="true"
+          />
+          <img
+            key={moodImages[imageIndex]}
+            className="mood-story__image mood-story__image--current"
+            src={moodImages[imageIndex]}
+            alt="Colourful mood cards representing different feelings"
+          />
+          <div className="mood-story__shade" />
+          <div className="mood-story__content">
+            <span className="mood-eyebrow">A softer way to check in</span>
+            <h1>Give your feelings a little space.</h1>
+            <p>Pause, notice what is present, and keep a gentle record of your day.</p>
+          </div>
+        </section>
 
-        <div className="mood-options" aria-label="Choose your mood">
+        <section className="mood-panel">
+          <div className="mood-heading">
+            <p className="mood-kicker">Your private check-in</p>
+            <h2 className="mood-title">Mood Tracker</h2>
+            <p className="mood-intro-text">How are you feeling right now?</p>
+          </div>
+
+          <div className="mood-options" aria-label="Choose your mood">
           {moodOptions.map((option) => (
             <button
               key={option.value}
@@ -107,21 +152,21 @@ function MoodTracker() {
               <span>{option.label}</span>
             </button>
           ))}
-        </div>
+          </div>
 
-        <textarea
-          className="mood-notes"
-          placeholder="Write your note..."
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-        />
+          <textarea
+            className="mood-notes"
+            placeholder="Write your note..."
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+          />
 
-        <button className="save-mood-btn" onClick={saveMood} disabled={!mood}>
-          Save Mood
-        </button>
+          <button className="save-mood-btn" onClick={saveMood} disabled={!mood}>
+            Save Mood <span aria-hidden="true">&#8594;</span>
+          </button>
 
-        <section className="saved-moods">
-          <h2>Saved Moods</h2>
+          <section className="saved-moods">
+            <h2>Saved Moods</h2>
 
           {moods.length === 0 ? (
             <p className="empty-moods">Your saved moods will appear here.</p>
@@ -148,6 +193,7 @@ function MoodTracker() {
               })}
             </div>
           )}
+          </section>
         </section>
       </div>
     </main>
