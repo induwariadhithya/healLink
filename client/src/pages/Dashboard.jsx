@@ -16,9 +16,9 @@ import "./Dashboard.css";
 
 function getGreeting() {
   const hour = new Date().getHours();
-  if (hour < 12) return "Good morning";
-  if (hour < 18) return "Good afternoon";
-  return "Good evening";
+  if (hour < 12) return "Good Morning";
+  if (hour < 18) return "Good Afternoon";
+  return "Good Evening";
 }
 
 function getFormattedDate() {
@@ -26,6 +26,13 @@ function getFormattedDate() {
     weekday: "long",
     month: "long",
     day: "numeric",
+  });
+}
+
+function getFormattedTime() {
+  return new Date().toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
   });
 }
 
@@ -60,7 +67,27 @@ export default function Dashboard() {
     { day: "Sun", color: "#E5E5E5" },
   ]);
 
+  // Live clock — updates every second
+  const [currentTime, setCurrentTime] = useState(getFormattedTime());
+
   useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(getFormattedTime());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+    useEffect(() => {
+    // Helper: build a timezone-safe date key (YYYY-MM-DD) using local date parts
+    function toLocalDateKey(dateInput) {
+      const d = new Date(dateInput);
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
     // Fetch mood entries
     fetch("http://localhost:5000/api/moods")
       .then((res) => res.json())
@@ -70,34 +97,35 @@ export default function Dashboard() {
           setMoodStreak(data.length);
 
           const moodColorMap = {
-  Happy: "#6E9A82",   // green - Calm category
-  Calm: "#6E9A82",    // green
-  Anxious: "#D9A45B", // gold - Okay category
-  Sad: "#8C8AA8",     // purple - Low category
-  Angry: "#8C8AA8",   // purple - Low category
-};
+            Happy: "#6E9A82",
+            Calm: "#6E9A82",
+            Anxious: "#D9A45B",
+            Sad: "#8C8AA8",
+            Angry: "#8C8AA8",
+          };
 
           const today = new Date();
           const last7Days = [];
           for (let i = 6; i >= 0; i--) {
             const d = new Date(today);
             d.setDate(today.getDate() - i);
-            last7Days.push(d.toDateString());
+            last7Days.push(toLocalDateKey(d));
           }
 
           const moodByDate = {};
           data.forEach((entry) => {
-            const entryDate = new Date(entry.date || entry.createdAt).toDateString();
+            const entryDate = toLocalDateKey(entry.date || entry.createdAt);
             if (!moodByDate[entryDate]) {
               moodByDate[entryDate] = entry.mood;
             }
           });
 
           const dayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-          const updatedWeek = last7Days.map((dateStr) => {
-            const date = new Date(dateStr);
-            const label = dayLabels[date.getDay()];
-            const mood = moodByDate[dateStr];
+          const updatedWeek = last7Days.map((dateKey) => {
+            const [y, m, d] = dateKey.split("-").map(Number);
+            const localDate = new Date(y, m - 1, d);
+            const label = dayLabels[localDate.getDay()];
+            const mood = moodByDate[dateKey];
             return {
               day: label,
               color: mood ? (moodColorMap[mood] || "#8C8AA8") : "#E5E5E5",
@@ -124,10 +152,10 @@ export default function Dashboard() {
   }, []);
 
   const SUMMARY_CARDS = [
-    { label: "Mood streak", value: `${moodStreak} days`, accent: "sage", icon: Flame, image: cardStreakImg },
-    { label: "Journal entries", value: journalCount, accent: "gold", icon: NotebookText, image: cardJournalImg },
-    { label: "Last logged mood", value: lastMood, accent: "sage", icon: Sparkles, image: cardMoodImg },
-  ];
+  { label: "Mood entries", value: moodStreak, accent: "sage", icon: Flame, image: cardStreakImg },
+  { label: "Journal entries", value: journalCount, accent: "gold", icon: NotebookText, image: cardJournalImg },
+  { label: "Last logged mood", value: lastMood, accent: "sage", icon: Sparkles, image: cardMoodImg },
+];
 
   return (
     <main className="mb-dash">
@@ -148,11 +176,12 @@ export default function Dashboard() {
               <p>Here's a quick look at how you've been doing.</p>
             </div>
             <div className="mb-dash__header-right">
-              <span className="mb-dash__date">{getFormattedDate()}</span>
-              <div className="mb-dash__avatar">
-                {displayName.charAt(0).toUpperCase()}
-              </div>
-            </div>
+  <span className="mb-dash__date">{getFormattedDate()}</span>
+  <span className="mb-dash__time">{currentTime}</span>
+  <div className="mb-dash__avatar">
+    {displayName.charAt(0).toUpperCase()}
+  </div>
+</div>
           </div>
         </header>
 
@@ -172,18 +201,7 @@ export default function Dashboard() {
           })}
         </section>
 
-        <div className="mb-dash__progress">
-          <div className="mb-dash__progress-labels">
-            <span>Weekly check-ins</span>
-            <span>{checkedInDays}/7 days</span>
-          </div>
-          <div className="mb-dash__progress-bar">
-            <div
-              className="mb-dash__progress-fill"
-              style={{ width: `${(checkedInDays / 7) * 100}%` }}
-            />
-          </div>
-        </div>
+       
       </section>
 
       {/* --- Weekly mood overview --- */}
