@@ -7,6 +7,7 @@ import loginP2 from '../assets/images/login-slide-p2.jpeg';
 import loginP3 from '../assets/images/login-slide-p3.jpg';
 import loginP6 from '../assets/images/login-slide-p6.jpg';
 import loginP5 from '../assets/images/login-slide-p5.jpg';
+import healLinkLogo from '../assets/images/logo.png';
 import './Login.css';
 
 const LOGIN_IMAGES = [
@@ -81,7 +82,7 @@ export default function Login() {
 
         <div className="login-panel">
           <div className="login-panel__topline">
-            <span className="login-mark">HL</span>
+            <img className="login-mark" src={healLinkLogo} alt="HealLink logo" />
             <span>HealLink</span>
           </div>
           <div className="login-heading">

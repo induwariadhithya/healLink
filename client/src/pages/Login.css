@@ -131,16 +131,11 @@
 }
 
 .login-mark {
-  display: grid;
-  width: 31px;
-  height: 31px;
-  place-items: center;
-  border-radius: 50%;
-  color: #fffdf9;
-  background: #4a438b;
-  font-family: var(--mb-font-body);
-  font-size: 0.65rem;
-  letter-spacing: 0.04em;
+  display: block;
+  width: 39px;
+  height: 39px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 .login-heading h2 {

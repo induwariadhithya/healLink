@@ -4,6 +4,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import API from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import registerImage from '../assets/images/register-wellbeing.jpg';
+import healLinkLogo from '../assets/images/logo.png';
 import './Register.css';
 
 export default function Register() {
@@ -39,7 +40,7 @@ export default function Register() {
       <section className="register-shell" aria-label="Create a HealLink account">
         <div className="register-panel">
           <div className="register-brand">
-            <span className="register-mark">HL</span>
+            <img className="register-mark" src={healLinkLogo} alt="HealLink logo" />
             <span>HealLink</span>
           </div>
 
