@@ -120,7 +120,6 @@ export default function Register() {
             <p>One quiet place for the thoughts, moods, and progress that matter to you.</p>
           </div>
           <div className="register-story__badge">
-            <span>01</span>
             <span>your wellbeing, your pace</span>
           </div>
         </div>
