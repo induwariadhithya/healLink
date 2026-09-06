@@ -1,0 +1,360 @@
+.mood-container {
+  display: grid;
+  width: 100%;
+  min-height: calc(100vh - 78px);
+  place-items: center;
+  padding: 42px 24px 64px;
+  background: #f1f0fb;
+}
+
+.mood-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(390px, 0.98fr);
+  width: min(1080px, 100%);
+  min-height: 610px;
+  overflow: hidden;
+  border: 1px solid rgba(49, 70, 57, 0.12);
+  background: #fffdf9;
+  box-shadow: 0 24px 60px rgba(54, 63, 48, 0.14);
+}
+
+.mood-story {
+  position: relative;
+  min-height: 610px;
+  overflow: hidden;
+  background: #39336f;
+}
+
+.mood-story img,
+.mood-story__shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mood-story img {
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.82;
+}
+
+.mood-story__image--previous {
+  z-index: 0;
+}
+
+.mood-story__image--current {
+  z-index: 1;
+  animation: mood-image-crossfade 1.4s ease both;
+}
+
+@keyframes mood-image-crossfade {
+  from {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+
+  to {
+    opacity: 0.82;
+    transform: scale(1);
+  }
+}
+
+.mood-story__shade {
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(48, 43, 96, 0.08) 8%, rgba(24, 20, 61, 0.92) 100%);
+}
+
+.mood-story__content {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: 36px 48px 42px;
+  color: #fffdf9;
+  background: linear-gradient(180deg, transparent, rgba(25, 20, 65, 0.88) 24%, rgba(25, 20, 65, 0.96));
+}
+
+.mood-eyebrow,
+.mood-kicker {
+  color: #c7b9ff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.mood-story h1 {
+  max-width: 430px;
+  margin: 14px 0;
+  color: #fffdf9;
+  font: 500 clamp(2.6rem, 4.3vw, 4.2rem)/0.98 var(--mb-font-display);
+  text-shadow: 0 2px 18px rgba(15, 11, 38, 0.45);
+}
+
+.mood-story p {
+  max-width: 420px;
+  color: rgba(255, 253, 249, 0.84);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.mood-panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 46px clamp(32px, 5vw, 64px);
+  background:
+    radial-gradient(circle at 88% 8%, rgba(121, 111, 190, 0.2), transparent 34%),
+    linear-gradient(145deg, #f9f7ff 0%, #e9e8fb 54%, #c9cae9 100%);
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.75);
+}
+
+.mood-heading {
+  text-align: center;
+}
+
+.mood-heading .mood-kicker {
+  margin: 0;
+}
+
+.mood-title {
+  margin: 11px 0 10px;
+  color: #292452;
+  font: 500 clamp(2rem, 3vw, 2.8rem)/1.1 var(--mb-font-display);
+}
+
+.mood-intro-text {
+  margin: 0;
+  color: #5f6184;
+  font-size: 0.9rem;
+}
+
+.mood-options {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  margin: 24px 0 14px;
+}
+
+.mood-option {
+  display: flex;
+  min-width: 0;
+  min-height: 66px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 9px 5px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--mb-text);
+  cursor: pointer;
+  font: 600 10px Arial, sans-serif;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.mood-option:hover {
+  border-color: #b4a1d7;
+  background: #f7f2ff;
+  transform: translateY(-3px);
+}
+
+.mood-option.selected {
+  border: 2px solid #a18bd0;
+  background: #f3efff;
+  color: var(--mb-ink);
+  box-shadow: 0 3px 10px rgba(117, 96, 165, 0.16);
+}
+
+.mood-emoji {
+  font-size: 27px;
+  line-height: 1;
+}
+
+.mood-notes {
+  width: 100%;
+  min-height: 112px;
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border: 1px solid #b8b7db;
+  border-radius: 4px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--mb-text);
+  font: 13px/1.5 Arial, sans-serif;
+  resize: vertical;
+}
+
+.mood-notes:focus {
+  border-color: #7168b1;
+  box-shadow: 0 0 0 3px rgba(113, 104, 177, 0.14);
+}
+
+.mood-notes::placeholder {
+  color: var(--mb-text-muted);
+}
+
+.save-mood-btn {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 4px;
+  background: #39336f;
+  color: white;
+  cursor: pointer;
+  font: 700 13px var(--mb-font-body);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.save-mood-btn:hover:not(:disabled) {
+  background: #292552;
+  transform: translateY(-1px);
+}
+
+.save-mood-btn:disabled {
+  background: #c4cec7;
+  cursor: not-allowed;
+}
+
+.saved-moods {
+  margin-top: 22px;
+}
+
+.saved-moods h2 {
+  margin: 0 0 10px;
+  color: var(--mb-ink);
+  text-align: center;
+  font: 600 22px/1.15 var(--mb-font-display);
+}
+
+.saved-mood-list {
+  display: grid;
+  max-height: 210px;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.saved-mood-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid rgba(168, 166, 205, 0.74);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.saved-mood-icon {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff3dc;
+  font-size: 18px;
+}
+
+.saved-mood-content {
+  min-width: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.saved-mood-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.saved-mood-card h3 {
+  margin: 0;
+  color: var(--mb-ink);
+  font: 600 13px Arial, sans-serif;
+}
+
+.saved-mood-card time {
+  color: var(--mb-text-muted);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.saved-mood-card p {
+  margin: 5px 0 0;
+  overflow: hidden;
+  color: var(--mb-text);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.delete-mood {
+  padding: 5px 7px;
+  border: 1px solid #f0d1ca;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--mb-danger);
+  cursor: pointer;
+  font: 600 9px Arial, sans-serif;
+}
+
+.delete-mood:hover {
+  background: #fff3f0;
+}
+
+.empty-moods {
+  margin: 0;
+  padding: 22px;
+  border: 1px dashed var(--mb-border);
+  border-radius: 14px;
+  color: var(--mb-text-muted);
+  text-align: center;
+  font-size: 14px;
+}
+
+@media (max-width: 760px) {
+  .mood-container {
+    display: block;
+    padding: 28px 16px 48px;
+  }
+
+  .mood-shell {
+    display: block;
+    min-height: 0;
+  }
+
+  .mood-story {
+    min-height: 340px;
+  }
+
+  .mood-story__content {
+    padding: 28px 28px 30px;
+  }
+
+  .mood-story h1 {
+    font-size: 2.65rem;
+  }
+
+  .mood-panel {
+    padding: 34px 28px 40px;
+  }
+}
+
+@media (max-width: 420px) {
+  .mood-options {
+    gap: 2px;
+  }
+
+  .mood-panel {
+    padding: 30px 18px 34px;
+  }
+}
