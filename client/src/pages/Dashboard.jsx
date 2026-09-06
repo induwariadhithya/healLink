@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Smile, BookOpen, HeartPulse, Flame, NotebookText, Sparkles } from "lucide-react";
+import { Smile, BookOpen, HeartPulse, Flame, NotebookText, Sparkles, Compass } from "lucide-react";
 import heroImg from "../assets/images/dashboard-hero.jpg";
 import moodActionImg from "../assets/images/mood-action.jpg";
 import journalActionImg from "../assets/images/journal-action.jpg";
@@ -11,6 +11,7 @@ import cardMoodImg from "../assets/images/card-mood.jpg";
 import weekBgImg from "../assets/images/week-bg.jpg";
 import { useAuth } from "../context/AuthContext";
 import { useState, useEffect } from "react";
+import wellnessHubActionImg from "../assets/images/wellness-hub-action.jpg";
 import "./Dashboard.css";
 
 function getGreeting() {
@@ -38,6 +39,7 @@ const QUICK_LINKS = [
   { title: "Log today's mood", to: "/mood-tracker", desc: "Takes less than a minute.", icon: Smile, image: moodActionImg },
   { title: "Write a journal entry", to: "/journal", desc: "Let your thoughts out.", icon: BookOpen, image: journalActionImg },
   { title: "Take a stress check", to: "/stress", desc: "See how you're really doing.", icon: HeartPulse, image: stressActionImg },
+  { title: "Visit Wellness Hub", to: "/wellness-hub", desc: "Explore tips and resources.", icon: Compass, image: wellnessHubActionImg },
 ];
 
 export default function Dashboard() {
