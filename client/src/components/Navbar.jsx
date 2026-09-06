@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import logoImg from "../assets/images/logo.png";
 import "./Navbar.css";
 
 // Simple leaf-shaped breathing dot used as the brand mark
 const BrandMark = () => (
-  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-    <circle cx="11" cy="11" r="9" stroke="var(--mb-sage)" strokeWidth="2" />
-    <circle cx="11" cy="11" r="3.5" fill="var(--mb-gold)" />
-  </svg>
+  <img src={logoImg} alt="HealLink logo" className="mb-navbar__logo" />
 );
 
 const NAV_LINKS = [
