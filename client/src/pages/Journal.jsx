@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import API from "../utils/api";
 import { getUserStorageKey } from "../utils/userStorage";
 import "./Journal.css";
+import journalImage1 from "../assets/images/j1.jpeg";
+import journalImage2 from "../assets/images/j2.jpeg";
+import journalImage3 from "../assets/images/j3.jpeg";
 
 const JOURNAL_STORAGE_KEY = "heallink-journal-entries";
 const DELETED_JOURNAL_STORAGE_KEY = "heallink-deleted-journal-entries";
@@ -49,7 +52,26 @@ const moodOptions = [
   { emoji: "🧘", label: "Peaceful" },
 ];
 
-const entryHistory = [];
+const entryHistory = [
+  {
+    id: "image-1",
+    title: "New Entry",
+    image: journalImage1,
+    quote: "Every new day brings a fresh reason to be grateful.",
+  },
+  {
+    id: "image-2",
+    title: "Morning Reset",
+    image: journalImage2,
+    quote: "Slow moments can be the ones that restore us most.",
+  },
+  {
+    id: "image-3",
+    title: "Sunset Walk",
+    image: journalImage3,
+    quote: "Breathe deeply and let the calm find you.",
+  },
+];
 
 export default function Journal() {
   const [selectedDate, setSelectedDate] = useState("2026-08-31");
@@ -318,7 +340,7 @@ export default function Journal() {
                         className="delete-entry-btn"
                         onClick={() => deleteEntry(entry)}
                         aria-label={`Delete ${entry.title}`}
-                        title="Delete entry"git status
+                        title="Delete entry"
                       >
                         Delete
                       </button>
