@@ -102,7 +102,7 @@ export default function Journal() {
   useEffect(() => {
     const loadEntries = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/journals");
+        const response = await axios.get("https://heal-link-one.vercel.app/api/journals");
         const savedEntries = response.data.map((entry) => ({
           ...entry,
           id: entry._id,
@@ -183,7 +183,7 @@ export default function Journal() {
       setSaveMessage("Saved locally. Connect the server to sync online.");
 
       setIsSaving(true);
-      const response = await axios.post("http://localhost:5000/api/journals", {
+      const response = await axios.post("https://heal-link-one.vercel.app/api/journals", {
         title: "Daily Reflection",
         content,
         mood: moodValues[mood] || "Good",
@@ -217,7 +217,7 @@ export default function Journal() {
 
     try {
       if (isApiEntry) {
-        await axios.delete(`http://localhost:5000/api/journals/${entry.id}`);
+        await axios.delete(`https://heal-link-one.vercel.app/api/journals/${entry.id}`);
       }
     } catch (error) {
       console.error("Unable to delete journal entry online", error);
@@ -352,7 +352,7 @@ export default function Journal() {
                         className="delete-entry-btn"
                         onClick={() => deleteEntry(entry)}
                         aria-label={`Delete ${entry.title}`}
-                        title="Delete entry"
+                        title="Delete entry"git status
                       >
                         Delete
                       </button>

@@ -89,7 +89,7 @@ export default function Dashboard() {
     }
 
     // Fetch mood entries
-    fetch("http://localhost:5000/api/moods")
+    fetch("https://heal-link-one.vercel.app/api/moods")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
@@ -141,7 +141,7 @@ export default function Dashboard() {
       .catch((err) => console.error("Failed to fetch moods:", err));
 
     // Fetch journal entries
-    fetch("http://localhost:5000/api/journals")
+    fetch("https://heal-link-one.vercel.app/api/journals")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {

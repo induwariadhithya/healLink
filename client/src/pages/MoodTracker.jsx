@@ -37,7 +37,7 @@ function MoodTracker() {
   // Get all moods
   const fetchMoods = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/moods");
+      const res = await axios.get("https://heal-link-one.vercel.app/api/moods");
       setMoods(res.data);
       localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(res.data));
     } catch {
@@ -74,7 +74,7 @@ function MoodTracker() {
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/api/moods", {
+      const response = await axios.post("https://heal-link-one.vercel.app/api/moods", {
         mood,
         note,
       });
@@ -97,7 +97,7 @@ function MoodTracker() {
   const deleteMood = async (id) => {
     try {
       if (!String(id).startsWith("local-")) {
-        await axios.delete(`http://localhost:5000/api/moods/${id}`);
+        await axios.delete(`https://heal-link-one.vercel.app/api/moods/${id}`);
       }
     } catch (error) {
       console.error("Unable to delete mood online", error);
