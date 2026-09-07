@@ -1,0 +1,463 @@
+/* =========================================
+   Positive Quotes Library — Premium Edition
+   ========================================= */
+
+.quotes-page {
+  min-height: 100vh;
+  padding: 64px 20px 90px;
+  background:
+    radial-gradient(circle at top left, rgba(116, 166, 146, 0.18), transparent 30%),
+    radial-gradient(circle at top right, rgba(198, 174, 236, 0.18), transparent 26%),
+    linear-gradient(180deg, #f6faf8 0%, #f8f6fb 100%);
+  box-sizing: border-box;
+}
+
+.quotes-container {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+/* Header */
+.quotes-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.quotes-icon {
+  width: 82px;
+  height: 82px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffffff 0%, #edf8f4 100%);
+  border: 1px solid rgba(104, 145, 132, 0.18);
+  box-shadow: 0 20px 40px rgba(90, 116, 108, 0.12);
+  font-size: 36px;
+}
+
+.quotes-eyebrow {
+  margin: 0 0 10px;
+  color: #597d6d;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2.7px;
+  text-transform: uppercase;
+}
+
+.quotes-header h1 {
+  margin: 0 0 12px;
+  color: #1f2d2a;
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.quotes-header > p:last-child {
+  max-width: 660px;
+  margin: 0 auto;
+  color: #5f6d7b;
+  font-size: 1.04rem;
+  line-height: 1.8;
+}
+
+/* Featured quote */
+.featured-quote {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto 30px;
+  padding: 42px 36px 30px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(241,249,246,0.96));
+  border: 1px solid rgba(105, 141, 130, 0.18);
+  border-radius: 30px;
+  box-shadow: 0 22px 60px rgba(54, 79, 72, 0.12);
+  overflow: hidden;
+}
+
+.featured-quote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(127, 179, 164, 0.08), transparent 50%, rgba(194, 180, 232, 0.08));
+  pointer-events: none;
+}
+
+.featured-decoration {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  font-size: 30px;
+  opacity: 0.75;
+}
+
+.featured-label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(98, 139, 127, 0.12);
+  color: #4c7268;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.featured-emoji {
+  position: relative;
+  z-index: 1;
+  margin: 22px 0 12px;
+  font-size: 46px;
+}
+
+.featured-text {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto 18px;
+  color: #2f3b3a;
+  font-size: clamp(1.45rem, 2.5vw, 2.15rem);
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: -0.02em;
+}
+
+.featured-category {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #f0f7f4;
+  color: #54776d;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.random-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #597d6d 0%, #456c60 100%);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 12px 25px rgba(75, 110, 98, 0.24);
+}
+
+.random-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+  box-shadow: 0 18px 32px rgba(75, 110, 98, 0.28);
+}
+
+/* Search */
+.quote-search {
+  max-width: 680px;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(31, 52, 47, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(22, 36, 32, 0.05);
+}
+
+.quote-search span {
+  font-size: 19px;
+}
+
+.quote-search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #304040;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.quote-search input::placeholder {
+  color: #9aa6ae;
+}
+
+/* Categories */
+.category-filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+
+.category-btn {
+  padding: 10px 16px;
+  border: 1px solid rgba(75, 110, 98, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #5b6974;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-btn:hover {
+  border-color: rgba(75, 110, 98, 0.5);
+  color: #2d514b;
+  transform: translateY(-1px);
+}
+
+.category-btn.active {
+  background: linear-gradient(135deg, #4a6d63 0%, #385c54 100%);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 12px 22px rgba(75, 110, 98, 0.2);
+}
+
+/* Library heading */
+.library-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.library-heading h2 {
+  margin: 0 0 6px;
+  color: #20322d;
+  font-size: clamp(1.7rem, 2vw, 2.2rem);
+}
+
+.library-heading p {
+  margin: 0;
+  color: #6f7f87;
+  font-size: 0.95rem;
+}
+
+.quote-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 88px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(94, 134, 122, 0.12);
+  color: #42675d;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* Quote grid */
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+/* Quote card */
+.quote-card {
+  position: relative;
+  padding: 22px 22px 18px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(111, 131, 125, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 14px 30px rgba(29, 42, 42, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.quote-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 20px 20px 0 0;
+  background: linear-gradient(90deg, #9ed0c0 0%, #d3b9ef 100%);
+}
+
+.quote-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 35px rgba(29, 42, 42, 0.09);
+  border-color: rgba(111, 131, 125, 0.2);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0 14px;
+}
+
+.card-emoji {
+  font-size: 28px;
+}
+
+.card-category {
+  padding: 6px 10px;
+  border-radius: 12px;
+  background: #eef7f3;
+  color: #54776d;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.small-quote-mark {
+  color: #9dc8bc;
+  font-family: Georgia, serif;
+  font-size: 52px;
+  line-height: 0.7;
+}
+
+.quote-text {
+  min-height: 108px;
+  margin: 6px 0 18px;
+  color: #2f3c3d;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid #edf1ef;
+  color: #94a3b1;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* No results */
+.no-quotes {
+  margin-top: 16px;
+  padding: 48px 20px;
+  text-align: center;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(90, 109, 99, 0.09);
+  box-shadow: 0 14px 30px rgba(29, 42, 42, 0.04);
+}
+
+.no-quotes span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 38px;
+}
+
+.no-quotes h3 {
+  margin-bottom: 8px;
+  color: #2e3e39;
+  font-size: 1.5rem;
+}
+
+.no-quotes p {
+  margin: 0;
+  color: #64717a;
+}
+
+/* Wellness tip */
+.quotes-tip {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 32px;
+  padding: 22px 24px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(99, 126, 118, 0.14);
+  box-shadow: 0 14px 30px rgba(29, 42, 42, 0.04);
+}
+
+.tip-icon {
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #edf8f4, #eaf2ff);
+  font-size: 26px;
+}
+
+.quotes-tip h3 {
+  margin: 0 0 6px;
+  color: #2d4a45;
+  font-size: 1.05rem;
+}
+
+.quotes-tip p {
+  margin: 0;
+  color: #64717a;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .quotes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .quotes-page {
+    padding: 42px 15px 72px;
+  }
+
+  .featured-quote {
+    padding: 32px 18px 26px;
+    border-radius: 22px;
+  }
+
+  .featured-text {
+    font-size: 1.4rem;
+  }
+
+  .quote-search {
+    margin-bottom: 18px;
+  }
+
+  .quotes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .library-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .quote-count {
+    white-space: nowrap;
+  }
+
+  .quotes-tip {
+    align-items: flex-start;
+    padding: 20px 18px;
+  }
+}
