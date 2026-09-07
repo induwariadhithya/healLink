@@ -49,6 +49,8 @@ const moodOptions = [
   { emoji: "🧘", label: "Peaceful" },
 ];
 
+const entryHistory = [];
+
 export default function Journal() {
   const [selectedDate, setSelectedDate] = useState("2026-08-31");
   const [mood, setMood] = useState("😌");
@@ -126,7 +128,6 @@ export default function Journal() {
       "🧘": "Good",
     };
 
-    const entryHistory = [];
     const localEntry = {
       id: `local-${Date.now()}`,
       title: "Daily Reflection",
