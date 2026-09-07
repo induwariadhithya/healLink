@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const protect = require("../middleware/authMiddleware");
 
 const {
   getMoods,
@@ -7,6 +8,8 @@ const {
   updateMood,
   deleteMood,
 } = require("../controllers/moodController");
+
+router.use(protect);
 
 router.get("/", getMoods);
 

@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../utils/api";
+import { getUserStorageKey } from "../utils/userStorage";
 import "./Journal.css";
-import journalImage1 from "../assets/images/j1.jpeg";
-import journalImage2 from "../assets/images/j2.jpeg";
-import journalImage3 from "../assets/images/j3.jpeg";
 
 const JOURNAL_STORAGE_KEY = "heallink-journal-entries";
 const DELETED_JOURNAL_STORAGE_KEY = "heallink-deleted-journal-entries";
 
 const getStoredEntries = () => {
   try {
-    const stored = localStorage.getItem(JOURNAL_STORAGE_KEY);
+    const stored = localStorage.getItem(getUserStorageKey(JOURNAL_STORAGE_KEY));
     return stored ? JSON.parse(stored) : [];
   } catch (error) {
     console.error("Failed to read saved journal entries", error);
@@ -20,7 +18,7 @@ const getStoredEntries = () => {
 
 const getDeletedEntryIds = () => {
   try {
-    const stored = localStorage.getItem(DELETED_JOURNAL_STORAGE_KEY);
+    const stored = localStorage.getItem(getUserStorageKey(DELETED_JOURNAL_STORAGE_KEY));
     return stored ? JSON.parse(stored) : [];
   } catch (error) {
     console.error("Failed to read deleted journal entries", error);
@@ -51,40 +49,6 @@ const moodOptions = [
   { emoji: "🧘", label: "Peaceful" },
 ];
 
-const entryHistory = [
-  {
-    id: 1,
-    date: "Aug 31",
-    mood: "😌",
-    title: "New Entry",
-    image: journalImage1,
-    quote: "Every new day brings a fresh reason to be grateful.",
-  },
-  {
-    id: 2,
-    date: "Aug 28",
-    mood: "😊",
-    title: "Morning Reset",
-    image: journalImage2,
-    quote: "Slow moments can be the ones that restore us most.",
-  },
-  {
-    id: 3,
-    date: "Aug 25",
-    mood: "😌",
-    title: "Sunset Walk",
-    image: journalImage3,
-    quote: "Breathe deeply and let the calm find you.",
-  },
-  {
-    id: 4,
-    date: "Oct 10, 2023",
-    mood: "😌",
-    title: "Daily Thoughts",
-    text: "Happy thoughts. I'd work. I can finally stop and rest.",
-  },
-];
-
 export default function Journal() {
   const [selectedDate, setSelectedDate] = useState("2026-08-31");
   const [mood, setMood] = useState("😌");
@@ -95,14 +59,14 @@ export default function Journal() {
   const [saveMessageType, setSaveMessageType] = useState("success");
   const [pastEntries, setPastEntries] = useState(() => {
     const storedEntries = getStoredEntries();
-    return filterDeletedEntries(mergeEntries(storedEntries, entryHistory));
+    return filterDeletedEntries(storedEntries);
   });
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     const loadEntries = async () => {
       try {
-        const response = await axios.get("https://heal-link-one.vercel.app/api/journals");
+        const response = await API.get("/journals");
         const savedEntries = response.data.map((entry) => ({
           ...entry,
           id: entry._id,
@@ -112,12 +76,12 @@ export default function Journal() {
           mood: entry.mood,
         }));
 
-        const mergedEntries = filterDeletedEntries(mergeEntries(savedEntries, getStoredEntries(), entryHistory));
+        const mergedEntries = filterDeletedEntries(mergeEntries(savedEntries, getStoredEntries()));
         setPastEntries(mergedEntries);
-        localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(mergedEntries));
+        localStorage.setItem(getUserStorageKey(JOURNAL_STORAGE_KEY), JSON.stringify(mergedEntries));
       } catch (error) {
         console.error("Unable to load journal entries", error);
-        setPastEntries(filterDeletedEntries(mergeEntries(getStoredEntries(), entryHistory)));
+        setPastEntries(filterDeletedEntries(getStoredEntries()));
       }
     };
 
@@ -174,7 +138,7 @@ export default function Journal() {
     const nextEntries = [localEntry, ...previousEntries];
 
     try {
-      localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(nextEntries));
+      localStorage.setItem(getUserStorageKey(JOURNAL_STORAGE_KEY), JSON.stringify(nextEntries));
       setPastEntries(nextEntries);
       setThoughts("");
       setGrateful("");
@@ -183,7 +147,7 @@ export default function Journal() {
       setSaveMessage("Saved locally. Connect the server to sync online.");
 
       setIsSaving(true);
-      const response = await axios.post("https://heal-link-one.vercel.app/api/journals", {
+      const response = await API.post("/journals", {
         title: "Daily Reflection",
         content,
         mood: moodValues[mood] || "Good",
@@ -201,7 +165,7 @@ export default function Journal() {
 
       const refreshedEntries = [apiEntry, ...nextEntries.filter((entry) => entry.id !== localEntry.id)];
       setPastEntries(refreshedEntries);
-      localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(refreshedEntries));
+      localStorage.setItem(getUserStorageKey(JOURNAL_STORAGE_KEY), JSON.stringify(refreshedEntries));
       setSaveMessageType("success");
       setSaveMessage("Journal entry saved successfully.");
     } catch (error) {
@@ -217,7 +181,7 @@ export default function Journal() {
 
     try {
       if (isApiEntry) {
-        await axios.delete(`https://heal-link-one.vercel.app/api/journals/${entry.id}`);
+        await API.delete(`/journals/${entry.id}`);
       }
     } catch (error) {
       console.error("Unable to delete journal entry online", error);
@@ -226,8 +190,8 @@ export default function Journal() {
     const remainingEntries = pastEntries.filter((pastEntry) => pastEntry.id !== entry.id);
     const deletedIds = [...getDeletedEntryIds(), entry.id].map(String);
     setPastEntries(remainingEntries);
-    localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(remainingEntries));
-    localStorage.setItem(DELETED_JOURNAL_STORAGE_KEY, JSON.stringify([...new Set(deletedIds)]));
+    localStorage.setItem(getUserStorageKey(JOURNAL_STORAGE_KEY), JSON.stringify(remainingEntries));
+    localStorage.setItem(getUserStorageKey(DELETED_JOURNAL_STORAGE_KEY), JSON.stringify([...new Set(deletedIds)]));
     setSaveMessageType("success");
     setSaveMessage("Journal entry deleted.");
   };

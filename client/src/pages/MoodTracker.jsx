@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../utils/api";
+import { getUserStorageKey } from "../utils/userStorage";
 import "./MoodTracker.css";
 import moodImage from "../assets/images/mood.jpg";
 import moodImageOne from "../assets/images/m1.jpeg";
@@ -10,7 +11,7 @@ const MOOD_STORAGE_KEY = "heallink-moods";
 
 const getStoredMoods = () => {
   try {
-    return JSON.parse(localStorage.getItem(MOOD_STORAGE_KEY) || "[]");
+    return JSON.parse(localStorage.getItem(getUserStorageKey(MOOD_STORAGE_KEY)) || "[]");
   } catch (error) {
     console.error("Unable to read saved moods", error);
     return [];
@@ -37,9 +38,9 @@ function MoodTracker() {
   // Get all moods
   const fetchMoods = async () => {
     try {
-      const res = await axios.get("https://heal-link-one.vercel.app/api/moods");
+      const res = await API.get("/moods");
       setMoods(res.data);
-      localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(res.data));
+      localStorage.setItem(getUserStorageKey(MOOD_STORAGE_KEY), JSON.stringify(res.data));
     } catch {
       setMoods(getStoredMoods());
     }
@@ -74,20 +75,20 @@ function MoodTracker() {
     };
 
     try {
-      const response = await axios.post("https://heal-link-one.vercel.app/api/moods", {
+      const response = await API.post("/moods", {
         mood,
         note,
       });
       const nextMoods = [response.data, ...moods];
       setMoods(nextMoods);
-      localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(nextMoods));
+      localStorage.setItem(getUserStorageKey(MOOD_STORAGE_KEY), JSON.stringify(nextMoods));
 
       setMood("");
       setNote("");
     } catch {
       const nextMoods = [localMood, ...moods];
       setMoods(nextMoods);
-      localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(nextMoods));
+      localStorage.setItem(getUserStorageKey(MOOD_STORAGE_KEY), JSON.stringify(nextMoods));
       setMood("");
       setNote("");
     }
@@ -97,7 +98,7 @@ function MoodTracker() {
   const deleteMood = async (id) => {
     try {
       if (!String(id).startsWith("local-")) {
-        await axios.delete(`https://heal-link-one.vercel.app/api/moods/${id}`);
+        await API.delete(`/moods/${id}`);
       }
     } catch (error) {
       console.error("Unable to delete mood online", error);
@@ -105,7 +106,7 @@ function MoodTracker() {
 
     const nextMoods = moods.filter((item) => item._id !== id);
     setMoods(nextMoods);
-    localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(nextMoods));
+    localStorage.setItem(getUserStorageKey(MOOD_STORAGE_KEY), JSON.stringify(nextMoods));
   }
 
   return (

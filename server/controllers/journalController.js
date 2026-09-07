@@ -3,7 +3,7 @@ const Journal = require("../models/journal");
 const getJournals = async (req, res) => {
   try {
     console.log("GET /api/journals called");
-    const entries = await Journal.find().sort({ date: -1 });
+    const entries = await Journal.find({ userId: req.user.id }).sort({ date: -1 });
     res.status(200).json(entries);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -15,14 +15,14 @@ const createJournal = async (req, res) => {
     console.log("POST /api/journals body:", req.body);
     console.log("POST /api/journals file:", req.file && req.file.filename);
 
-    const { title, content, mood, userId } = req.body;
+    const { title, content, mood } = req.body;
     const imagePath = req.file ? `/uploads/${req.file.filename}` : undefined;
 
     const entry = new Journal({
       title,
       content,
       mood,
-      userId,
+      userId: req.user.id,
       image: imagePath,
     });
 
@@ -46,7 +46,7 @@ const updateJournal = async (req, res) => {
       updateData.image = `/uploads/${req.file.filename}`;
     }
 
-    const entry = await Journal.findByIdAndUpdate(id, updateData, {
+    const entry = await Journal.findOneAndUpdate({ _id: id, userId: req.user.id }, updateData, {
       new: true,
       runValidators: true,
     });
@@ -64,7 +64,7 @@ const updateJournal = async (req, res) => {
 const deleteJournal = async (req, res) => {
   try {
     const { id } = req.params;
-    const entry = await Journal.findByIdAndDelete(id);
+    const entry = await Journal.findOneAndDelete({ _id: id, userId: req.user.id });
 
     if (!entry) {
       return res.status(404).json({ message: "Journal entry not found" });

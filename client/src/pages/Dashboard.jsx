@@ -10,6 +10,7 @@ import cardJournalImg from "../assets/images/card-journal.jpg";
 import cardMoodImg from "../assets/images/card-mood.jpg";
 import weekBgImg from "../assets/images/week-bg.jpg";
 import { useAuth } from "../context/AuthContext";
+import API from "../utils/api";
 import { useState, useEffect } from "react";
 import wellnessHubActionImg from "../assets/images/wellness-hub-action.jpg";
 import "./Dashboard.css";
@@ -89,8 +90,8 @@ export default function Dashboard() {
     }
 
     // Fetch mood entries
-    fetch("https://heal-link-one.vercel.app/api/moods")
-      .then((res) => res.json())
+    API.get("/moods")
+      .then((res) => res.data)
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
           setLastMood(data[0].mood);
@@ -141,8 +142,8 @@ export default function Dashboard() {
       .catch((err) => console.error("Failed to fetch moods:", err));
 
     // Fetch journal entries
-    fetch("https://heal-link-one.vercel.app/api/journals")
-      .then((res) => res.json())
+    API.get("/journals")
+      .then((res) => res.data)
       .then((data) => {
         if (Array.isArray(data)) {
           setJournalCount(data.length);

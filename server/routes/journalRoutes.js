@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
+const protect = require("../middleware/authMiddleware");
 const {
   getJournals,
   createJournal,
@@ -20,6 +21,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
+router.use(protect);
 
 router.get("/", getJournals);
 router.post("/", upload.single("image"), createJournal);
