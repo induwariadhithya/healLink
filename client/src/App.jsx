@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import MoodTracker from "./pages/MoodTracker";
 import Journal from "./pages/Journal";
+import StressQuiz from "./pages/StressQuiz";
+import PositiveQuotes from "./pages/PositiveQuotes";
 import WellnessHub from "./pages/WellnessHub";
 
 import Login from "./pages/Login";
@@ -43,7 +45,16 @@ function App() {
 
         {/* Wellness Hub */}
         <Route path="/wellness-hub" element={<WellnessHub />} />
-
+        {/* Stress Support */}
+<Route
+  path="/stress"
+  element={
+    <>
+      <StressQuiz />
+      <PositiveQuotes />
+    </>
+  }
+/>
       </Routes>
 
       <Footer />

@@ -261,7 +261,7 @@ function PositiveQuotes() {
               </p>
 
               <div className="card-bottom">
-                <span>MindConnect</span>
+                <span>HealLink</span>
                 <span>♡</span>
               </div>
 

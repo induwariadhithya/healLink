@@ -5,7 +5,7 @@
 .stress-quiz-page {
   min-height: 100vh;
   padding: 50px 20px;
-  background: linear-gradient(135deg, #75e9bf 0%, #9ee0d4 100%);
+  background: #eee7ff;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -138,9 +138,9 @@
 /* Selected Answer */
 
 .option.selected {
-  border-color: #52796f;
+  border-color: #6d5279;
   background: #e6f3ef;
-  color: #31584f;
+  color: #473158;
   font-weight: 700;
   box-shadow: 0 3px 10px rgba(82, 121, 111, 0.15);
 }
