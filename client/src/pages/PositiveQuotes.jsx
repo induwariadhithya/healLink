@@ -1,106 +1,128 @@
 import { useState } from "react";
 import "./positiveQuotes.css";
 
+// Quote Images
+import quote1 from "../assets/positive-quotes/positive-quote1.jpg";
+import quote2 from "../assets/positive-quotes/positive-quote2.jpg";
+import quote3 from "../assets/positive-quotes/positive-quote3.jpg";
+import quote4 from "../assets/positive-quotes/positive-quote4.jpg";
+import quote5 from "../assets/positive-quotes/positive-quote5.jpg";
+import quote6 from "../assets/positive-quotes/positive-quote6.jpg";
+import quote7 from "../assets/positive-quotes/positive-quote7.jpg";
+import quote8 from "../assets/positive-quotes/positive-quote8.jpg";
+import quote9 from "../assets/positive-quotes/positive-quote9.jpg";
+import quote10 from "../assets/positive-quotes/positive-quote10.jpg";
+import quote11 from "../assets/positive-quotes/positive-quote11.jpg";
+import quote12 from "../assets/positive-quotes/positive-quote12.jpg";
+import quote13 from "../assets/positive-quotes/positive-quote13.jpg";
+import quote14 from "../assets/positive-quotes/positive-quote14.jpg";
+import quote15 from "../assets/positive-quotes/positive-quote15.jpg";
+import quote16 from "../assets/positive-quotes/positive-quote16.jpg";
+import quote17 from "../assets/positive-quotes/positive-quote17.jpg";
+import quote18 from "../assets/positive-quotes/positive-quote18.jpg";
+import quote19 from "../assets/positive-quotes/positive-quote19.jpg";
+import quote20 from "../assets/positive-quotes/positive-quote20.jpg";
+
 const quotes = [
   {
     text: "You are doing better than you think.",
     category: "Self Care",
-    emoji: "🌿",
+    image: quote1,
   },
   {
     text: "Small steps every day can create meaningful change.",
     category: "Growth",
-    emoji: "🌱",
+    image: quote2,
   },
   {
     text: "Take a moment to breathe and be kind to yourself.",
     category: "Mindfulness",
-    emoji: "🧘",
+    image: quote3,
   },
   {
     text: "It is okay to take a break when you need one.",
     category: "Self Care",
-    emoji: "☕",
+    image: quote4,
   },
   {
     text: "Your feelings matter, and it is okay to talk about them.",
     category: "Emotions",
-    emoji: "💚",
+    image: quote5,
   },
   {
     text: "Focus on what you can do today, one step at a time.",
     category: "Growth",
-    emoji: "🌸",
+    image: quote6,
   },
   {
     text: "You don't have to have everything figured out today.",
     category: "Mindfulness",
-    emoji: "🌤️",
+    image: quote7,
   },
   {
     text: "Rest is not giving up. Rest is taking care of yourself.",
     category: "Self Care",
-    emoji: "🌙",
+    image: quote8,
   },
   {
     text: "Be patient with yourself. Growth takes time.",
     category: "Growth",
-    emoji: "🌻",
+    image: quote9,
   },
   {
     text: "A difficult day does not mean you have a difficult life.",
     category: "Hope",
-    emoji: "🌈",
+    image: quote10,
   },
   {
     text: "There is always a reason to take another small step forward.",
     category: "Hope",
-    emoji: "✨",
+    image: quote11,
   },
   {
     text: "Give yourself the same kindness you give to others.",
     category: "Self Care",
-    emoji: "💗",
+    image: quote12,
   },
   {
     text: "Breathe in calm. Breathe out tension.",
     category: "Mindfulness",
-    emoji: "🍃",
+    image: quote13,
   },
   {
     text: "You are allowed to grow at your own pace.",
     category: "Growth",
-    emoji: "🌿",
+    image: quote14,
   },
   {
     text: "Even small moments of peace are worth appreciating.",
     category: "Mindfulness",
-    emoji: "🕊️",
+    image: quote15,
   },
   {
     text: "Tomorrow gives you another opportunity to begin again.",
     category: "Hope",
-    emoji: "🌅",
+    image: quote16,
   },
   {
     text: "You deserve time to relax, recharge, and care for yourself.",
     category: "Self Care",
-    emoji: "🫶",
+    image: quote17,
   },
   {
     text: "You have made it through difficult moments before.",
     category: "Hope",
-    emoji: "💙",
+    image: quote18,
   },
   {
     text: "Believe in the progress you cannot always see.",
     category: "Growth",
-    emoji: "🌼",
+    image: quote19,
   },
   {
     text: "One peaceful moment can change the feeling of an entire day.",
     category: "Mindfulness",
-    emoji: "🌸",
+    image: quote20,
   },
 ];
 
@@ -123,8 +145,9 @@ function PositiveQuotes() {
       selectedCategory === "All" ||
       quote.category === selectedCategory;
 
-    const matchesSearch =
-      quote.text.toLowerCase().includes(search.toLowerCase());
+    const matchesSearch = quote.text
+      .toLowerCase()
+      .includes(search.toLowerCase());
 
     return matchesCategory && matchesSearch;
   });
@@ -136,13 +159,10 @@ function PositiveQuotes() {
 
   return (
     <div className="quotes-page">
-
       <div className="quotes-container">
 
-        {/* Header */}
+        {/* HEADER */}
         <section className="quotes-header">
-          <div className="quotes-icon">🌿</div>
-
           <p className="quotes-eyebrow">
             DAILY WELLNESS
           </p>
@@ -155,41 +175,55 @@ function PositiveQuotes() {
           </p>
         </section>
 
-        {/* Featured Quote */}
-        <section className="featured-quote">
 
-          <div className="featured-decoration">
-            ✨
+        {/* FEATURED QUOTE */}
+        <section
+          className="featured-quote"
+          style={{
+            backgroundImage: `
+              linear-gradient(
+                rgba(255, 255, 255, 0.35),
+                rgba(48, 43, 99, 0.30)
+              ),
+              url(${quotes[featuredQuote].image})
+            `,
+          }}
+        >
+          <div className="featured-content">
+
+            <span className="featured-label">
+              QUOTE FOR YOU
+            </span>
+
+            <div className="featured-mark">
+              “
+            </div>
+
+            <p className="featured-text">
+              {quotes[featuredQuote].text}
+            </p>
+
+            <span className="featured-category">
+              {quotes[featuredQuote].category}
+            </span>
+
+            <button
+              className="random-btn"
+              onClick={showRandomQuote}
+            >
+              Show Me Another
+              <span>→</span>
+            </button>
+
           </div>
-
-          <span className="featured-label">
-            ✨ Quote for You
-          </span>
-
-          <div className="featured-emoji">
-            {quotes[featuredQuote].emoji}
-          </div>
-
-          <p className="featured-text">
-            “{quotes[featuredQuote].text}”
-          </p>
-
-          <span className="featured-category">
-            {quotes[featuredQuote].category}
-          </span>
-
-          <button
-            className="random-btn"
-            onClick={showRandomQuote}
-          >
-            ✨ Show Me Another
-          </button>
-
         </section>
 
-        {/* Search */}
+
+        {/* SEARCH */}
         <div className="quote-search">
-          <span>🔍</span>
+          <span className="search-icon">
+            ⌕
+          </span>
 
           <input
             type="text"
@@ -199,9 +233,9 @@ function PositiveQuotes() {
           />
         </div>
 
-        {/* Categories */}
-        <div className="category-filter">
 
+        {/* CATEGORY FILTER */}
+        <div className="category-filter">
           {categories.map((category) => (
             <button
               key={category}
@@ -215,13 +249,21 @@ function PositiveQuotes() {
               {category}
             </button>
           ))}
-
         </div>
 
-        {/* Quote Count */}
+
+        {/* LIBRARY HEADING */}
         <div className="library-heading">
+
           <div>
-            <h2>Daily Inspiration</h2>
+            <p className="section-eyebrow">
+              FIND YOUR MOMENT
+            </p>
+
+            <h2>
+              Daily Inspiration
+            </h2>
+
             <p>
               Find something that speaks to you.
             </p>
@@ -230,75 +272,114 @@ function PositiveQuotes() {
           <span className="quote-count">
             {filteredQuotes.length} Quotes
           </span>
+
         </div>
 
-        {/* Quote Cards */}
+
+        {/* QUOTE CARDS */}
         <div className="quotes-grid">
 
-          {filteredQuotes.map((quote, index) => (
+          {filteredQuotes.map((quote) => {
 
-            <article
-              className="quote-card"
-              key={`${quote.text}-${index}`}
-            >
+            const originalIndex = quotes.indexOf(quote);
 
-              <div className="card-top">
-                <span className="card-emoji">
-                  {quote.emoji}
-                </span>
+            return (
+              <article
+                className="quote-card"
+                key={quote.text}
+                style={{
+                  backgroundImage: `
+                    linear-gradient(
+                      rgba(255, 255, 255, 0.52),
+                      rgba(48, 43, 99, 0.52)
+                    ),
+                    url(${quote.image})
+                  `,
+                }}
+              >
 
-                <span className="card-category">
-                  {quote.category}
-                </span>
-              </div>
+                <div className="card-top">
 
-              <div className="small-quote-mark">
-                “
-              </div>
+                  <span className="card-category">
+                    {quote.category}
+                  </span>
 
-              <p className="quote-text">
-                {quote.text}
-              </p>
+                  <span className="card-number">
+                    {String(originalIndex + 1).padStart(2, "0")}
+                  </span>
 
-              <div className="card-bottom">
-                <span>HealLink</span>
-                <span>♡</span>
-              </div>
+                </div>
 
-            </article>
 
-          ))}
+                <div className="small-quote-mark">
+                  “
+                </div>
+
+
+                <p className="quote-text">
+                  {quote.text}
+                </p>
+
+
+                <div className="card-bottom">
+
+                  <span>
+                    HEALLINK
+                  </span>
+
+                  <span className="heart">
+                    ♡
+                  </span>
+
+                </div>
+
+              </article>
+            );
+          })}
 
         </div>
 
-        {/* No Results */}
+
+        {/* NO RESULTS */}
         {filteredQuotes.length === 0 && (
           <div className="no-quotes">
-            <span>🌱</span>
 
-            <h3>No quotes found</h3>
+            <div className="no-quotes-mark">
+              “
+            </div>
+
+            <h3>
+              No quotes found
+            </h3>
 
             <p>
               Try another search or category.
             </p>
+
           </div>
         )}
 
-        {/* Wellness Tip */}
+
+        {/* BOTTOM REMINDER */}
         <section className="quotes-tip">
 
-          <div className="tip-icon">
-            💚
-          </div>
+          <div className="tip-line"></div>
 
           <div>
-            <h3>A little reminder</h3>
+            <div className="tip-heart">♥</div>
+            <p className="tip-eyebrow">
+              A LITTLE REMINDER
+            </p>
+
+            <h3>
+              Your mental well-being matters.
+            </h3>
 
             <p>
-              Your mental well-being matters. Take things one
-              day at a time and remember to give yourself
-              kindness and patience.
+              Take things one day at a time and remember
+              to give yourself kindness and patience.
             </p>
+
           </div>
 
         </section>
