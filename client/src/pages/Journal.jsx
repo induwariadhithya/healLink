@@ -126,6 +126,7 @@ export default function Journal() {
       "🧘": "Good",
     };
 
+    const entryHistory = [];
     const localEntry = {
       id: `local-${Date.now()}`,
       title: "Daily Reflection",
